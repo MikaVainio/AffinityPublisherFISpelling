@@ -12,5 +12,5 @@ You can download dictionary files by clicking the green Code button on top right
 
 ![image](https://user-images.githubusercontent.com/24242044/205483402-095cd467-d668-45f7-826c-2dee38fca26b.png)
 
-Open the folder by clicking `Open` the copy unzipped files. Change the character set if needed.
+Open the folder by clicking `Open` then copy unzipped files. Change the character set if needed.
 
