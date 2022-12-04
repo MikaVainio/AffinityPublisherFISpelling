@@ -8,4 +8,5 @@ The `fi_FI.dic` file is a bag of Finnish words. There is a word counter at the b
 
 The `hyph_fi_FI.dic` file contains instructions how to spit words for hyphens. There is also a character set definition at the 1st row. If any problems when hyphenating scandinavian letters change this to UTF8.
 
+You can download dictionary files by clicking the green Code button on top right hand corner. Unzip contents to Affinitys Dictionaries foldet. You can find this location in the app from `Edit - Preferences - Tools`
 
