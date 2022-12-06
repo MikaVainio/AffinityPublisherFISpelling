@@ -89,9 +89,16 @@ def scanFromOrderedDictionary(fileName, wordToFind):
 
 if __name__ == "__main__":
 
-    # Some preliminary tests
+    # SOME PRELIMINARY TESTS
+
+    # Try to add a word alredy int the dictionary
     result = addSingleWordToDictionary('fi_FI.dic', 'maastopyörä')
     print(result)
 
+    # Scan for the word in the dictionary
     result = scanFromOrderedDictionary('fi_FI.dic', 'maastopyörä')
+    print(result)
+
+    # Scan for the plural of previous word (missing in the dictionary)
+    result = scanFromOrderedDictionary('fi_FI.dic', 'maastopyörät')
     print(result)
