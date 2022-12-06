@@ -2,7 +2,9 @@
 
 This repository conntains 3 files needed in Affinity Publisher to hyphenate and spell check Finnish language. Files have been forked from https://www.apt-browse.org/browse/debian/wheezy/main/all/myspell-fi/0.7-18/file/usr/share/hunspell. At the moment original hunspell dictionary contains some repeating and unsorted word blocks. Removed in this repository.
 
-The`fi_FI.aff` file contains basic information how Finnish words are consturcted. In the begining there is an instruction to set a correct character set. Original files use UTF8 encoding. According to tests I have been able to conduct UTF8 works well with Finnish Windows 10. There may be other sources of these files with ISO8859-1 encoding. In those files the character setting on 1st row must be `SET ISO8859-1` to make spelling and hyphenation function properly. Wrong character encoding settings may add duplicate suggestions or dislpaly strange characters. The followinf screen shot shows  correct suggestions when set UTF8:
+## Files to start with Finnish spelling and hyphenation
+
+The`fi_FI.aff` file contains basic information how Finnish words are consturcted. In the begining there is an instruction to set a correct character set. Original files use **UTF8** encoding. According to tests I have been able to conduct UTF8 works well with Finnish Windows 10. Further tests will be made with different operating systems and language versions in the future. There may be other sources of these files with **ISO8859-1** encoding. In those files the character setting on 1st row must be `SET ISO8859-1` to make spelling and hyphenation function properly. Wrong character encoding settings may add duplicate suggestions or dislpaly strange characters. The following screen shot shows  correct suggestions when set UTF8:
 
 ![image](https://user-images.githubusercontent.com/24242044/205984577-ac7ab74b-f8fe-4bb8-8969-bd34ba0f276a.png)
 
@@ -28,3 +30,5 @@ You can download dictionary files by clicking the green Code button on top right
 
 Open the folder by clicking `Open` then copy unzipped files. Change the character set if needed.
 
+## Tools for updating and cleaning spelling dictionary
+The structure of `fi_FI.dic` is very simple: on the 1st row there is a word counter and the rest of rows contain words in alphabetical order. The purpose of this repostitory is provide simple tools for adding, sorting and removing duplicates from the spelling dictionary. With appropriate tools dictionary can be maintained and expanded to meet our requirements. Tools will be added as they are ready to be published. Some rough ideas written in Python can be found in the development branch. Hope we have standalone tools with a GUI in the future.
