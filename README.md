@@ -4,7 +4,7 @@ This repository conntains 3 files needed in Affinity Publisher to hyphenate and 
 
 ## Files to start with Finnish spelling and hyphenation
 
-The`fi_FI.aff` file contains basic information how Finnish words are consturcted. In the begining there is an instruction to set a correct character set. Original files use **UTF8** encoding. According to tests I have been able to conduct UTF8 works well with Finnish Windows 10. Further tests will be made with different operating systems and language versions in the future. There may be other sources of these files with **ISO8859-1** encoding. In those files the character setting on 1st row must be `SET ISO8859-1` to make spelling and hyphenation function properly. Wrong character encoding settings may add duplicate suggestions or dislpaly strange characters. The following screen shot shows  correct suggestions when set UTF8:
+The`fi_FI.aff` file contains basic information how Finnish words are consturcted. In the begining there is an instruction to set a correct character set. Original files use **UTF8** encoding. According to tests I have been able to conduct UTF8 works well with Finnish Windows 10. Further tests will be made with different operating systems and language versions in the future. There may be other sources of these files with **ISO8859-1** encoding. In those files the character setting on 1st row must be `SET ISO8859-1` to make spelling and hyphenation function properly. Wrong character encoding settings may add duplicate suggestions or dislpaly strange characters. The following screen shot shows  correct suggestions when set to `UTF8`:
 
 ![image](https://user-images.githubusercontent.com/24242044/205984577-ac7ab74b-f8fe-4bb8-8969-bd34ba0f276a.png)
 
