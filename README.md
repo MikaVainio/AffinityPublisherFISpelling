@@ -14,8 +14,9 @@ and some suggestions are duplicated
 
 ![image](https://user-images.githubusercontent.com/24242044/205986888-da047e28-2280-4256-a0e1-70709af388b5.png)
 
+but when the character setting is correct no odd behavior is seen:
 
-
+![image](https://user-images.githubusercontent.com/24242044/205987987-97b25ae8-9c62-4960-a032-e59973fcd8a2.png)
 
 The `fi_FI.dic` file is a bag of Finnish words. There is a word counter at the beginig of the file. Affinity Publisher does not update this file. If you teach new words to Publisher they are stored elswhere not in this file.
 
