@@ -24,11 +24,12 @@ The `fi_FI.dic` file is a bag of Finnish words. There is a word counter at the b
 
 The `hyph_fi_FI.dic` file contains instructions how to split words for hyphens. There is also a character set definition at the 1st row. 
 
+## Installing files 
 You can download dictionary files by clicking the green Code button on top right hand corner. Unzip contents to Affinitys Dictionaries folder. You can find this location in the app from `Edit - Preferences - Tools`
 
 ![image](https://user-images.githubusercontent.com/24242044/205483402-095cd467-d668-45f7-826c-2dee38fca26b.png)
 
-Open the folder by clicking `Open` then copy unzipped files. Change the character set if needed.
+Open the folder by clicking `Open` then copy unzipped files to this folder.
 
 ## Tools for updating and cleaning spelling dictionary
-The structure of `fi_FI.dic` is very simple: on the 1st row there is a word counter and the rest of rows contain words in alphabetical order. The purpose of this repostitory is provide simple tools for adding, sorting and removing duplicates from the spelling dictionary. With appropriate tools dictionary can be maintained and expanded to meet our requirements. Tools will be added as they are ready to be published. Some rough ideas written in Python can be found in the development branch. Hope we have standalone tools with a GUI in the future.
+The structure of `fi_FI.dic` is very simple: on the 1st row there is a word counter and the rest of rows contain words in alphabetical order. The purpose of this repostitory is provide simple tools for adding, sorting and removing duplicates from the spelling dictionary. With appropriate tools dictionary can be maintained and expanded to meet our requirements. Tools will be added as they are ready to be published. Some rough ideas written in Python can be found in the development branch. Hope we have standalone tools with a GUI in the future. As tools are ready for use instructions can be found on this repositorys Wiki pages.
