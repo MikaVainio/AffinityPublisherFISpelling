@@ -72,7 +72,7 @@ def scanFromOrderedDictionary(fileName, wordToFind):
 
         # Check if the dictionary row has greater alphabetical index than the word
         elif dictionaryWord > wordToFind + '\n':
-            resultText = f'{wordToFind} was not found in the Finnish dictionary, scanned {curentRow} rows, last word was {dictionaryWord}'
+            resultText = f'{wordToFind} was not found in the Finnish dictionary, scanned {curentRow} rows, last word before exit was {dictionaryWord}'
             resultFound = True
             resultRow = curentRow
             continueSacan = False
