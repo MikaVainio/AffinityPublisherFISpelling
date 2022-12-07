@@ -10,7 +10,7 @@ def addSingleWordToDictionary(fileName, wordToAdd):
         wordToAdd (str): A word to be added to the dictionary file
 
     Returns:
-        str: Has the added word, or a notice of it already existing in the dictionary
+        str: Has the word being added, or a notice of it already existing in the dictionary
     """
     # Open the dictionary file for reading
     file = open(fileName, 'r', encoding='UTF8')
