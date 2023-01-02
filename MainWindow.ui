@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>293</width>
+    <height>407</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="leftMargin">
+       <number>9</number>
+      </property>
+      <property name="topMargin">
+       <number>9</number>
+      </property>
+      <property name="rightMargin">
+       <number>9</number>
+      </property>
+      <property name="bottomMargin">
+       <number>9</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="wordToAddLabel">
+        <property name="text">
+         <string>Lisättävä sana</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="wordToAddLineEdit">
+        <property name="dragEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="cursorMoveStyle">
+         <enum>Qt::VisualMoveStyle</enum>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="wordsListLabel">
+        <property name="text">
+         <string>Sanaluettelo</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="wordsListWidget">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="acceptDrops">
+         <bool>true</bool>
+        </property>
+        <property name="dragEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="dragDropOverwriteMode">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::DragDrop</enum>
+        </property>
+        <property name="defaultDropAction">
+         <enum>Qt::MoveAction</enum>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::MultiSelection</enum>
+        </property>
+        <property name="flow">
+         <enum>QListView::TopToBottom</enum>
+        </property>
+        <property name="viewMode">
+         <enum>QListView::ListMode</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addChosenPushButton">
+        <property name="toolTip">
+         <string>Lisää sanaluettelon sanastoon</string>
+        </property>
+        <property name="text">
+         <string>Tallenna valitut</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addAllPushButton">
+        <property name="toolTip">
+         <string>Lisää sanaluettelon sanastoon</string>
+        </property>
+        <property name="text">
+         <string> Tallenna kaikki</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>293</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Asetukset</string>
+    </property>
+    <widget class="QMenu" name="menuThemes">
+     <property name="title">
+      <string>Teema</string>
+     </property>
+     <addaction name="actionDark"/>
+     <addaction name="actionLight"/>
+     <addaction name="actionAdjustTheme"/>
+     <addaction name="actionDefaultTheme"/>
+    </widget>
+    <addaction name="actionDictionaryFolder"/>
+    <addaction name="menuThemes"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Ohje</string>
+    </property>
+   </widget>
+   <addaction name="menuSettings"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionDictionaryFolder">
+   <property name="text">
+    <string>Sanakirjahakemisto...</string>
+   </property>
+  </action>
+  <action name="actionDark">
+   <property name="text">
+    <string>Tumma</string>
+   </property>
+  </action>
+  <action name="actionLight">
+   <property name="text">
+    <string>Vaalea</string>
+   </property>
+  </action>
+  <action name="actionAdjustTheme">
+   <property name="text">
+    <string>Muokkaa</string>
+   </property>
+  </action>
+  <action name="actionDefaultTheme">
+   <property name="text">
+    <string>Oletus</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
