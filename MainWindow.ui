@@ -38,6 +38,9 @@
       </item>
       <item>
        <widget class="QLineEdit" name="wordToAddLineEdit">
+        <property name="toolTip">
+         <string>Vedä tai kirjoita lisättävä sana tähän</string>
+        </property>
         <property name="dragEnabled">
          <bool>true</bool>
         </property>
@@ -65,6 +68,9 @@
         </property>
         <property name="acceptDrops">
          <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>Luettelo lisättävistä sanoista, muokaa kaksoisklikkaamalla</string>
         </property>
         <property name="dragEnabled">
          <bool>true</bool>
@@ -94,8 +100,11 @@
       </item>
       <item>
        <widget class="QPushButton" name="addChosenPushButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="toolTip">
-         <string>Lisää sanaluettelon sanastoon</string>
+         <string>Tallenna valitut sanat sanastoon</string>
         </property>
         <property name="text">
          <string>Tallenna valitut</string>
@@ -104,8 +113,11 @@
       </item>
       <item>
        <widget class="QPushButton" name="addAllPushButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="toolTip">
-         <string>Lisää sanaluettelon sanastoon</string>
+         <string>Tallenna kaikki sanat sanastoon</string>
         </property>
         <property name="text">
          <string> Tallenna kaikki</string>
