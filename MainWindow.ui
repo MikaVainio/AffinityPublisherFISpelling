@@ -158,13 +158,22 @@
      <string>Ohje</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Työkalut</string>
+    </property>
+    <addaction name="actionSanityCheck"/>
+    <addaction name="actionAddFromJoukahainen"/>
+    <addaction name="actionMuunna_merkist"/>
+   </widget>
    <addaction name="menuSettings"/>
+   <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionDictionaryFolder">
    <property name="text">
-    <string>Sanakirjahakemisto...</string>
+    <string>Sanakirjatiedosto...</string>
    </property>
   </action>
   <action name="actionDark">
@@ -185,6 +194,21 @@
   <action name="actionDefaultTheme">
    <property name="text">
     <string>Oletus</string>
+   </property>
+  </action>
+  <action name="actionSanityCheck">
+   <property name="text">
+    <string>Huolla sanankirja...</string>
+   </property>
+  </action>
+  <action name="actionAddFromJoukahainen">
+   <property name="text">
+    <string>Lisää Joukahaisesta...</string>
+   </property>
+  </action>
+  <action name="actionMuunna_merkist">
+   <property name="text">
+    <string>Muunna merkistö...</string>
    </property>
   </action>
  </widget>

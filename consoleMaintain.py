@@ -200,6 +200,7 @@ class MaintainDictionary:
         distinctWords = results[2]
         sortedDistinctWords = sorted(distinctWords)
         self.writeBackToDictionaryFile(sortedDistinctWords)
+        # FIXME: Result count is not correct
         result = f'Added {amntWords - numberOfDuplicates} words to the dictionary. {numberOfDuplicates} were duplicates'
         return result
 
