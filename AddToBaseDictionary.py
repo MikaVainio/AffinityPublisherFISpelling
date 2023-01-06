@@ -1,3 +1,4 @@
+# FIXME: Poistettanee lopullisessa versiossa
 # Some ideas for updating the Finnish spelling dictionary
 
 def addSingleWordToDictionary(fileName, wordToAdd):

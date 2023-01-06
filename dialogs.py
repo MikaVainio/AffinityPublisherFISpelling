@@ -4,9 +4,10 @@
 # LIBRARIES AND MODULES
 import os
 import json
+import dictionaryMaintain 
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
-from qt_material import QtStyleTools, apply_stylesheet # For theme adjustments
+from qt_material import apply_stylesheet # For theme adjustments
 
 # CLASS DEFINITIONS
 
@@ -144,6 +145,46 @@ class SanitizeDictionary(QDialog):
                 file.write(str(self.sanitizedWordCount) + '\n')
                 file.writelines(self.sanitizedWordList)
         self.close()
+
+class JoukahainenDialog(QDialog):
+    """Dialog for getting words from Joukahainen dictionary."""
+    def __init__(self):
+        super().__init__()
+
+        loadUi('joukahainenDialog.ui', self)
+        self.setWindowTitle('Sanojen nouto Joukahaisesta')
+        self.settings = settingsFromJsonFile('settings.json')
+        scale = self.settings['scale']
+        self.extra = {'density_scale': f'{scale}'}
+        apply_stylesheet(self, theme=self.settings['theme'], extra=self.extra)
+        self.currentDictionary = self.settings['dictionary']
+        self.characterEncoding = self.settings['encoding']
+
+        self.xmlLE = self.xmlFileLineEdit
+        self.browsePB = self.browsePushButton
+        self.browsePB.clicked.connect(self.fileDialog)
+        self.savePB =self.savePushButton
+        self.savePB.clicked.connect(self.joukahainenToDictionary)
+
+
+    def fileDialog(self):
+        """A methtod to create Dialog window for choosing Joukahainen xml file
+        """
+        defaultDirectory = os.path.expanduser('~') + '\\Downloads'
+        print(defaultDirectory)     
+        self.xmlFileName, check = QFileDialog.getOpenFileName(None, 'Valitse Joukahaisen sanasto', defaultDirectory, 'xml-tiestostot (*.xml)')
+        if self.xmlFileName:
+            self.xmlLE.setText(os.path.normpath(self.xmlFileName))  
+
+    def joukahainenToDictionary(self):
+        """A Method to convert and save words of Joukahainen to the spelling dictionary
+        """
+        maintenanceOperation = dictionaryMaintain.MaintenanceOperation(self.currentDictionary, self.characterEncoding)
+        self.joukahainenWords = maintenanceOperation.readFromJoukahainen(self.xmlFileName)
+
+        # TODO: Kirjoita tallennus loppuun!
+
+    
 
 # A function for reading settings from a JSON file 
 def settingsFromJsonFile(file):

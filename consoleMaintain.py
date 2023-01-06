@@ -1,3 +1,5 @@
+# FIXME: Poistettanee lopullisesta versiosta
+
 # TOOLS FOR MAINTAINING TEH FINNISH HUNSPELL DICTIONAY FROM CONSOLE
 # =================================================================
 

@@ -65,6 +65,7 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         self.actionSanityCheck.triggered.connect(self.sanityCheck)
 
         # Open Lisää Joukahaisesta... dialog
+        self.actionAddFromJoukahainen.triggered.connect(self.bringFromJoukahainen)
 
         # Open Muunna merkistö... dialog
         # PUSH BUTTONS
@@ -167,25 +168,26 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
             addList.append(item.text())
             self.wordsList.takeItem(row)
         self.saveSelectedPB.setEnabled(False)
-        print(addList)
-        # FIXME: Merkistökoodaus puuttuu!
-        #
+        
         currentSettings = dialogs.settingsFromJsonFile('settings.json')
         dictionaryFile = currentSettings['dictionary']
         encoding = currentSettings['encoding']
         maintenanceOperation =  dictionaryMaintain.MaintenanceOperation(dictionaryFile, encoding)
         result = maintenanceOperation.addSeveralWordsToDictionaryFile(addList)
 
-        #maintainDictionary = consoleMaintain.MaintainDictionary(self.settings['dictionary'])
-        #result = maintainDictionary.addSeveralWordsToDictionaryFile(addList)
-        print(result)
-    # TODO: lisää kirjoitus tiedostoon
-    # A method to save all words into the spelling dictionary
+      
     def saveAll(self):
+        addList = []
         count = self.wordsList.count()
         for row in range(count):
-            print(self.wordsList.item(row).text())
+            addList.append(self.wordsList.item(row).text())
         self.wordsList.clear()
+        currentSettings = dialogs.settingsFromJsonFile('settings.json')
+        dictionaryFile = currentSettings['dictionary']
+        encoding = currentSettings['encoding']
+        maintenanceOperation =  dictionaryMaintain.MaintenanceOperation(dictionaryFile, encoding)
+        result = maintenanceOperation.addSeveralWordsToDictionaryFile(addList)
+        print(result)
         self.saveAllPB.setEnabled(False)
 
     # A method to enable and disable Tallenna kaikki push button
@@ -209,6 +211,10 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
     def sanityCheck(self):
         sanitizeDictionary = dialogs.SanitizeDictionary()
         sanitizeDictionary.exec()
+
+    def bringFromJoukahainen(self):
+        joukahainenDialog = dialogs.JoukahainenDialog()
+        joukahainenDialog.exec()
 
 if __name__ == "__main__":
 

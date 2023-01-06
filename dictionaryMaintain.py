@@ -1,4 +1,4 @@
-
+import xml.etree.ElementTree as ET
 
 class MaintenanceOperation():
     """For updating the spelling dictionary."""
@@ -28,8 +28,8 @@ class MaintenanceOperation():
         distinctWords = results[2]
         sortedDistinctWords = sorted(distinctWords)
         self.writeBackToDictionaryFile(sortedDistinctWords)
-        # FIXME: Result count is not correct
-        result = f'Added {amntWords - numberOfDuplicates} words to the dictionary. {numberOfDuplicates} were duplicates'
+        
+        result = f'Tryint to add {amntWords} words to the dictionary. {numberOfDuplicates} were finally added'
         return result
 
     def writeBackToDictionaryFile(self, wordList):
@@ -57,7 +57,26 @@ class MaintenanceOperation():
             result = (originalRowCount, rowCount, distinctList)
         return result 
 
+    def readFromJoukahainen(self, xmlFile):
+        """Reads words from Joukahainen xml based word dictionary
 
+        Args:
+            xmlFile (str): name of the xml file containing Joukahainen dictonary
+
+        Returns:
+            list: list of corrected words from Joukahainen
+        """
+        xmlTree = ET.parse(xmlFile)
+        root = xmlTree.getroot()
+        words = []
+        for node in root.findall('./word/forms/form'):
+            correctedWord = node.text.replace('=', '') # Remove egual signs from words
+            words.append(correctedWord)
+
+        # TODO: Poista print-komennot kun testattu
+        print(words)
+        print(len(words))
+        return words
 
     
 
