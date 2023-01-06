@@ -16,26 +16,133 @@ class SettingsHandler(QDialog):
         super().__init__()
     
         loadUi('settingsDialog.ui', self)
-        self.setWindowTitle('Asetukset')
+        self.setWindowTitle('Sanakirja-asetukset')
+
+        # Read the settings file
         self.settings = settingsFromJsonFile('settings.json')
-        apply_stylesheet(self, theme=self.settings['theme'])
+        scale = self.settings['scale']
+        self.extra = {'density_scale': f'{scale}'}
+        apply_stylesheet(self, theme=self.settings['theme'], extra=self.extra)
         self.currentDictionary = self.settings['dictionary']
+        self.characterEncoding = self.settings['encoding']
+        self.densityScale = self.settings['scale']
+
+        # UI elements
         self.browsePB = self.browsePushButton
         self.browsePB.clicked.connect(self.fileDialog)
         self.savePB = self.savePushButton
         self.savePB.clicked.connect(self.saveSettings)
         self.fileLE = self.fileLineEdit
         self.fileLE.setText(os.path.normpath(self.currentDictionary))
+        self.encodingCB = self.characterEncodingComboBox
+        self.encodingCB.setCurrentText(self.characterEncoding)
 
+    # A Method for changing the spelling dictionary
     def fileDialog(self):     
         self.fileLE.setText(self.currentDictionary)
         fileName, check = QFileDialog.getOpenFileName(None, 'Valitse sanakirja', self.currentDictionary, 'Sanakirjat (*.dic *.aff)')
         if fileName:
             self.fileLE.setText(os.path.normpath(fileName))
 
+    # Method for save dictionary settings
     def saveSettings(self):
         self.settings['dictionary'] = self.fileLE.text()
+        self.settings['encoding'] = self.encodingCB.currentText()
         saveSettingsToJsonFile('settings.json', self.settings)
+        self.close()
+
+class SetSize(QDialog):
+    """Increases or decreases the size of UI elements."""
+    def __init__(self):
+        super().__init__()
+
+        loadUi('sizeDialog.ui', self)
+        self.setWindowTitle('Muuta elementtien kokoa')
+
+        # Load settings from json file
+        self.settings = settingsFromJsonFile('settings.json')
+        scale = self.settings['scale']
+        self.extra = {'density_scale': f'{scale}'}
+        apply_stylesheet(self, theme=self.settings['theme'], extra=self.extra)
+        self.newSize = 0
+
+        # UI elements
+        self.sizeSB = self.sizeSpinBox
+        self.sizeSB.setRange(-5, 9)
+        self.sizeSB.setValue(int(scale))
+        self.sizeSB.valueChanged.connect(self.changeSize)
+        self.savePB = self.saveSizePushButton
+        self.savePB.clicked.connect(self.saveSizeSetting)
+
+    def changeSize(self):
+        self.newSize = str(self.sizeSB.value())
+        print(self.newSize)
+        self.newExtra = {'density_scale': f'{self.newSize}'}
+        apply_stylesheet(self, theme=self.settings['theme'], extra=self.newExtra)
+
+    def saveSizeSetting(self):
+        self.settings['scale'] = self.newSize
+        print(self.newSize)
+        saveSettingsToJsonFile('settings.json', self.settings)
+        self.close()
+
+class SanitizeDictionary(QDialog):
+    """Sorts dictionary, removes duplicates and updates the word counter."""
+    def __init__(self):
+        super().__init__()
+    
+        loadUi('sanitizeDictionary.ui', self)
+        self.setWindowTitle('Sanakirjan tarkistus ja korjaus')
+        self.settings = settingsFromJsonFile('settings.json')
+        scale = self.settings['scale']
+        self.extra = {'density_scale': f'{scale}'}
+        apply_stylesheet(self, theme=self.settings['theme'], extra=self.extra)
+        self.currentDictionary = self.settings['dictionary']
+        self.characterEncoding = self.settings['encoding']
+        self.sanitizedWordList = []
+        self.sanitizedWordCount = 0
+
+        self.inFileLcd = self.inFileLcdNumber
+        self.actualLcd = self.actualLcdNumber
+        self.finalLcd = self.finalLcdNumber
+
+        self.okPB = self.okPushButton
+        self.okPB.clicked.connect(self.saveSanitized)
+
+        self.anlyzeData = self.sanitize(self.currentDictionary, self.characterEncoding)
+        self.inFileLcd.display(int(self.anlyzeData[0]))
+        self.actualLcd.display(int(self.anlyzeData[1]))
+        self.finalLcd.display(int(self.anlyzeData[2]))
+    
+    def sanitize(self, dictionary, encoding):
+        """Reads the spelling dictionary, remove duplicates, sort and recount words
+
+        Args:
+            dictionary (str): file name of the dictionary
+            encoding (str): character encoding of the dictonary
+
+        Returns:
+            tuple: original, actual and final row counts
+        """
+        with open(dictionary, 'r', encoding=encoding) as file:
+            originalWordCount = file.readline()
+            unsortedDictionary = file.readlines()
+            sortedDictionary = sorted(unsortedDictionary)
+            realWordCount = str(len(sortedDictionary)) +'\n'
+            # Change to a Python dictionary which does not allow duplicate keys
+            dictionaryFromList = dict.fromkeys(sortedDictionary)
+            # Make it an ordinary list again
+            distinctList = list(dictionaryFromList)
+            finalRowCount = len(distinctList)
+            result = (originalWordCount, realWordCount, finalRowCount)
+            self.sanitizedWordCount = finalRowCount
+            self.sanitizedWordList = distinctList
+        return result
+        
+    def saveSanitized(self):
+        with open(self.currentDictionary, 'w', encoding=self.characterEncoding) as file:
+                file.write(str(self.sanitizedWordCount) + '\n')
+                file.writelines(self.sanitizedWordList)
         self.close()
 
 # A function for reading settings from a JSON file 

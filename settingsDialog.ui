@@ -6,18 +6,68 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>432</width>
-    <height>88</height>
+    <width>422</width>
+    <height>165</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
-    <widget class="QLineEdit" name="fileLineEdit"/>
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Merkistökoodaus</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="characterEncodingComboBox">
+       <property name="toolTip">
+        <string>Sanakirjojen merkistökoodaus </string>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Sanakirjoissa käytetty merkistökoodaus. Se on merkitty sekä aff-tiedoston että tavutustiedoston alkuun. Alkuperäinen koodaus on UTF8. ISO-8859-10 on pohjoismaisille kielille tarkoitettu merkistö ja Windows-1252 on windowsin graafisessa käyttöliittymässä yleisesti käytössä oleva merkistö. Olemassa olevan sanakirjan voi muuttaa toiseen merkkilajiin Työkalut-valikosta. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>utf8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>iso-8859-1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>windows-1252</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="folderLabel">
+       <property name="text">
+        <string>Sanakirjatiedosto</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="fileLineEdit">
+       <property name="toolTip">
+        <string>Sanakirjatiedoston polku ja nimi</string>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Sanakirjatiedoston nimi ja polku. Kaikki uudet sanat lisätään tähän tiedostoon. Tämä on myös kaikkien työkalujen oletussanakirja. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="4" column="0">
+   <item row="1" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="browsePushButton">
@@ -34,13 +84,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="folderLabel">
-     <property name="text">
-      <string>Sanakirjatiedosto</string>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

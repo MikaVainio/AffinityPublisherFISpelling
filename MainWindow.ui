@@ -39,7 +39,7 @@
       <item>
        <widget class="QLineEdit" name="wordToAddLineEdit">
         <property name="toolTip">
-         <string>Vedä tai kirjoita lisättävä sana tähän</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vedä tai kirjoita lisättävä sana tähän ja paina &amp;lt;enter&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="dragEnabled">
          <bool>true</bool>
@@ -151,7 +151,9 @@
      <addaction name="actionDefaultTheme"/>
     </widget>
     <addaction name="actionDictionaryFolder"/>
+    <addaction name="separator"/>
     <addaction name="menuThemes"/>
+    <addaction name="actionSize"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -209,6 +211,11 @@
   <action name="actionMuunna_merkist">
    <property name="text">
     <string>Muunna merkistö...</string>
+   </property>
+  </action>
+  <action name="actionSize">
+   <property name="text">
+    <string>Koko...</string>
    </property>
   </action>
  </widget>

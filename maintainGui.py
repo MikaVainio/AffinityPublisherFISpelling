@@ -10,7 +10,8 @@ from PyQt5 import QtCore, QtWidgets # For the Qt functionality
 from PyQt5.uic import loadUi # For loading the UI file
 from qt_material import QtStyleTools, apply_stylesheet # For theme adjustments
 import dialogs
-import consoleMaintain
+import dictionaryMaintain
+
 
 # CLASS DEFINITIONS
 # -----------------
@@ -34,9 +35,11 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
 
         # Load settings from json file
         self.settings = dialogs.settingsFromJsonFile('settings.json')
+        scale = self.settings['scale']
+        self.extra = {'density_scale': f'{scale}'}
 
         # Use latest chosen theme
-        apply_stylesheet(self.main, theme=self.settings['theme'])
+        apply_stylesheet(self.main, theme=self.settings['theme'], extra=self.extra)
                 
         # MENU ACTIONS
 
@@ -55,8 +58,11 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         # Set a custon theme
         self.actionAdjustTheme.triggered.connect(self.setCustomTheme)
 
+        # Set the size of UI elements
+        self.actionSize.triggered.connect(self.changeElementSize)
+
         # Open Huolla sanakirjaa... dialog
-        # self.actionSanityCheck.triggered.connect(self.sanityCheck)
+        self.actionSanityCheck.triggered.connect(self.sanityCheck)
 
         # Open Lisää Joukahaisesta... dialog
 
@@ -94,27 +100,48 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
 
     # A method to apply the dark theme
     def setDarkTheme(self):
-        apply_stylesheet(self.main, theme='dark_amber.xml')
+        self.settings = dialogs.settingsFromJsonFile('settings.json')
+        scale = self.settings['scale']
+        self.extra = {'density_scale': f'{scale}'}
+        apply_stylesheet(self.main, theme='dark_amber.xml', extra=self.extra)
         self.settings['theme'] = 'dark_amber.xml'
         dialogs.saveSettingsToJsonFile('settings.json', self.settings)
+        print('dark', self.settings)
 
     # A method to apply the light theme
     def setLightTheme(self):
-        apply_stylesheet(self.main, theme='light_cyan_500.xml')
+        self.settings = dialogs.settingsFromJsonFile('settings.json')
+        scale = self.settings['scale']
+        self.extra = {'density_scale': f'{scale}'}
+        apply_stylesheet(self.main, theme='light_cyan_500.xml', extra=self.extra)
         self.settings['theme'] = 'light_cyan_500.xml'
         dialogs.saveSettingsToJsonFile('settings.json', self.settings)
 
     # A method to apply the factory default theme (dark one)
     def setDefaultTheme(self):
-        apply_stylesheet(self.main, theme='default_theme.xml')
+        self.settings = dialogs.settingsFromJsonFile('settings.json')
+        scale = self.settings['scale']
+        self.extra = {'density_scale': f'{scale}'}
+        apply_stylesheet(self.main, theme='default_theme.xml', extra=self.extra)
         self.settings['theme'] = 'default_theme.xml'
         dialogs.saveSettingsToJsonFile('settings.json', self.settings)
 
     # A method to open custom theme tools
     def setCustomTheme(self):
+        self.settings = dialogs.settingsFromJsonFile('settings.json')
+        scale = self.settings['scale']
+        self.extra = {'density_scale': f'{scale}'}
         self.show_dock_theme(self.main)
         self.settings['theme'] = 'my_theme.xml'
         dialogs.saveSettingsToJsonFile('settings.json', self.settings)
+
+    def changeElementSize(self):
+        setSize = dialogs.SetSize()
+        setSize.exec()
+        self.settings = dialogs.settingsFromJsonFile('settings.json')
+        scale = self.settings['scale']
+        self.extra = {'density_scale': f'{scale}'}
+        apply_stylesheet(self.main, theme=self.settings['theme'], extra=self.extra)
 
     # A method to send word from the line edit to the word list
     def addToList(self):
@@ -140,11 +167,19 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
             addList.append(item.text())
             self.wordsList.takeItem(row)
         self.saveSelectedPB.setEnabled(False)
-        print(addList)       
-        maintainDictionary = consoleMaintain.MaintainDictionary(self.settings['dictionary'])
-        result = maintainDictionary.addSeveralWordsToDictionaryFile(addList)
-        print(result)
+        print(addList)
+        # FIXME: Merkistökoodaus puuttuu!
+        #
+        currentSettings = dialogs.settingsFromJsonFile('settings.json')
+        dictionaryFile = currentSettings['dictionary']
+        encoding = currentSettings['encoding']
+        maintenanceOperation =  dictionaryMaintain.MaintenanceOperation(dictionaryFile, encoding)
+        result = maintenanceOperation.addSeveralWordsToDictionaryFile(addList)
 
+        #maintainDictionary = consoleMaintain.MaintainDictionary(self.settings['dictionary'])
+        #result = maintainDictionary.addSeveralWordsToDictionaryFile(addList)
+        print(result)
+    # TODO: lisää kirjoitus tiedostoon
     # A method to save all words into the spelling dictionary
     def saveAll(self):
         count = self.wordsList.count()
@@ -169,6 +204,11 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
             self.saveSelectedPB.setEnabled(True)
         else:
             self.saveSelectedPB.setEnabled(False)
+
+    # A method to open the dictionary sanitizing dialog
+    def sanityCheck(self):
+        sanitizeDictionary = dialogs.SanitizeDictionary()
+        sanitizeDictionary.exec()
 
 if __name__ == "__main__":
 
