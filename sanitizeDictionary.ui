@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>238</width>
+    <height>185</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Ilmoitettu rivimäärä:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLCDNumber" name="inFileLcdNumber">
+     <property name="toolTip">
+      <string>Sanakirjan alkuun merkitty sanamäärä</string>
+     </property>
+     <property name="whatsThis">
+      <string>Oikolukusanakirjan alkuun merkitty sanojen lukumäärä. Saattaa olla virheellinen.</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="smallDecimalPoint">
+      <bool>true</bool>
+     </property>
+     <property name="digitCount">
+      <number>6</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Todellinen rivimäärä:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLCDNumber" name="actualLcdNumber">
+     <property name="toolTip">
+      <string>Lasekettu sanojen määrä sanakirjassa.</string>
+     </property>
+     <property name="whatsThis">
+      <string>Todellinen laskettu sanojen määrä ennen useampaan kertaan esiintyvien sanojen poistoa.</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="smallDecimalPoint">
+      <bool>true</bool>
+     </property>
+     <property name="digitCount">
+      <number>6</number>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Rivimäärä korjausten jälkeen:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLCDNumber" name="finalLcdNumber">
+     <property name="toolTip">
+      <string>Lopullinen sanojen määrä korjausten jälkeen</string>
+     </property>
+     <property name="whatsThis">
+      <string>Sanojen lopullinen lukumäärä, kun toistuvat sanat on poistettu.</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="smallDecimalPoint">
+      <bool>true</bool>
+     </property>
+     <property name="digitCount">
+      <number>6</number>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QPushButton" name="okPushButton">
+     <property name="whatsThis">
+      <string>Tallentataa korjaukset sanakirjaan.</string>
+     </property>
+     <property name="text">
+      <string>Korjaa</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

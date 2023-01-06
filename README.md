@@ -10,6 +10,7 @@ The `fi_FI.aff` file contains basic information how Finnish words are constructe
 
 If the encoding is set to UTF8, incorrect suggestions are shown:
 
+
 ![image](https://user-images.githubusercontent.com/24242044/205985457-24b283d5-182d-477e-9edb-06203626bf6b.png)
 
 ...and some suggestions are duplicated:
