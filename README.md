@@ -4,11 +4,11 @@ This repository contains 3 files needed in Affinity Publisher for hyphenation an
 
 ## Files to get started with Finnish spelling and hyphenation
 
-The `fi_FI.aff` file contains basic information how Finnish words are constructed. In the beginning, there is an instruction to set a correct character set. Original files use **UTF8** encoding. According to tests, I have been able to conduct that UTF8 works well with Finnish Windows 10. Further testing will be made with different operating systems and language versions in the future. Latest macOS versions have builtin support for Finnish language and there is no need for an additional spelling dictionary. There may be other sources of these files with **ISO8859-1** encoding. In those files, the character setting on 1st row must be `SET ISO8859-1` to make spelling and hyphenation function properly. Wrong character encoding settings may add duplicate suggestions or display strange characters. The following screen shot shows correct suggestions when the encoding is set to `UTF8`:
+The `fi_FI.aff` file contains basic information how Finnish words are constructed. In the beginning, there is an instruction to set a correct character set. Original affix file uses **ISO8859-1** encoding. According to tests, I have been able to conduct that its works well with Finnish Windows 10. Further testing will be made with different operating systems and language versions in the future. Latest macOS versions have builtin support for Finnish language and there is no need for an additional spelling dictionary. But automatic hyphenation needs a dictionary. Only hyphenation dictionary `hyph_fi_FI.dic` is needed. Do not install other Hunspell dictionaries to your Mac. There may be other sources of these files with **UTF8** encoding. In those files, the character setting on 1st row must be `SET ISO8859-1` to make spelling and hyphenation function properly. Wrong character encoding settings may add duplicate suggestions or display strange characters. The following screen shot shows correct suggestions when the encoding is set to `ISO8859-1`:
 
 ![image](https://user-images.githubusercontent.com/24242044/205984577-ac7ab74b-f8fe-4bb8-8969-bd34ba0f276a.png)
 
-If the encoding is set to ISO8859-1, incorrect suggestions are shown:
+If the encoding is set to UTF8, incorrect suggestions are shown:
 
 ![image](https://user-images.githubusercontent.com/24242044/205985457-24b283d5-182d-477e-9edb-06203626bf6b.png)
 
