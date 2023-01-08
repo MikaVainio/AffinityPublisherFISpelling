@@ -11,6 +11,10 @@ The `fi_FI.aff` file contains basic information how Finnish words are constructe
 ## Tool to update the spelling dictionary
 There is a tool for updating Finish spelling dictionary. You cand add new words, import words from **Joukahainen** dictionary and maintain your dictionary with the Spelling Maintenance Tool. Insturctions to use the tool are found on Wiki pages or tool's Help menu. Language in the tool is Finnish only assuming that users publishing in Finnish can understand it.
 
+![image](https://user-images.githubusercontent.com/24242044/211196521-dfa23b39-4b66-4697-8dc1-55c82eb888fc.png)
+
+New words can be typed to _Lisättävä sana_ field (1). By hitting the enter key word will be added to a list of words _Sanaluettelo_ (2). By pressing buttons (3) words will be saved to the spelling dictionary. _Tallenna valitut_ will save sellected words from the list and _Tallenna kaiki_ will save all words in the list-
+
 ## About dictionary files
 
 The `fi_FI.dic` file is a collection of Finnish words. There is a word counter at the beginning of the file. Affinity Publisher does not maintain this file. If you teach new words to Publisher, they are stored outside of this file. You can add words to this file with the Spelling Maintenance Tool. Spelling tool in Affinity publisher can suggest some words to be inserted. Suggestions are based on a affix file `fi_FI.aff`. Due to the limitations in hunspell's algorithms it does not work very well with Finnish language. This is the reason why user must add words all the time to spelling dictionary or to Affinity Publishers custom dictionary. Saddly Publisher reads the spelling dictionary at the startup. When words are added to the spelling dictionary you musta restart Publisher in order to recognise those words.
