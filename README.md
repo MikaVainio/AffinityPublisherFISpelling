@@ -24,7 +24,7 @@ You can download dictionary files by clicking the green Code button on the top r
 
 Open the folder by clicking `Open` then copy the unzipped dictonary files to this folder. In **Windows** copy `fi_FI.aff`, `fi_FI.dic` and `hyph_fi_FI.dic`. If you are using **Mac** computer copy only `hyph_fi_FI.dic`. 
 
-In **Mac** computers (as macOS Ventura 13.1) put the hyphention file into folder `fi-Fi`. You must create this forlder first. See the followinf picture:
+In **Mac** computers (as macOS Ventura 13.1) put the hyphention file into folder `fi-Fi`. You must create this forlder first. For the correct path see the followin picture:
 
 <img width="377" alt="image" src="https://user-images.githubusercontent.com/24242044/211194689-19258797-d408-4af3-9aef-ec9312fe4b82.png">
 
