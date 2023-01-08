@@ -181,8 +181,8 @@ class JoukahainenDialog(QDialog):
         """
         maintenanceOperation = dictionaryMaintain.MaintenanceOperation(self.currentDictionary, self.characterEncoding)
         self.joukahainenWords = maintenanceOperation.readFromJoukahainen(self.xmlFileName)
-
-        # TODO: Kirjoita tallennus loppuun!
+        result = maintenanceOperation.addSeveralWordsToDictionaryFile(self.joukahainenWords)
+        print(result)
 
     
 

@@ -91,9 +91,6 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         self.wordsList.itemDoubleClicked.connect(self.wordsListEdit)
         self.wordsList.itemSelectionChanged.connect(self.enableSaveSelectedPB)
 
-    
-
-
     # A method to open the settings dialog
     def openSettings(self):
         settingsHandler = dialogs.SettingsHandler()
@@ -136,6 +133,7 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         self.settings['theme'] = 'my_theme.xml'
         dialogs.saveSettingsToJsonFile('settings.json', self.settings)
 
+    # A method for sizing UI texts and other UI elements
     def changeElementSize(self):
         setSize = dialogs.SetSize()
         setSize.exec()
@@ -167,15 +165,14 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
             row = self.wordsList.row(item)
             addList.append(item.text())
             self.wordsList.takeItem(row)
-        self.saveSelectedPB.setEnabled(False)
-        
+        self.saveSelectedPB.setEnabled(False) 
         currentSettings = dialogs.settingsFromJsonFile('settings.json')
         dictionaryFile = currentSettings['dictionary']
         encoding = currentSettings['encoding']
         maintenanceOperation =  dictionaryMaintain.MaintenanceOperation(dictionaryFile, encoding)
         result = maintenanceOperation.addSeveralWordsToDictionaryFile(addList)
 
-      
+    # A method to save all words into the spelling dictionary  
     def saveAll(self):
         addList = []
         count = self.wordsList.count()
@@ -186,15 +183,13 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         dictionaryFile = currentSettings['dictionary']
         encoding = currentSettings['encoding']
         maintenanceOperation =  dictionaryMaintain.MaintenanceOperation(dictionaryFile, encoding)
-        result = maintenanceOperation.addSeveralWordsToDictionaryFile(addList)
-        print(result)
+        maintenanceOperation.addSeveralWordsToDictionaryFile(addList)
         self.saveAllPB.setEnabled(False)
 
     # A method to enable and disable Tallenna kaikki push button
     def enableSaveAll(self):
         count = self.wordsList.count()
         if count > 0:
-            print(count)
             self.saveAllPB.setEnabled(True)
         else:
             self.saveAllPB.setEnabled(False)
@@ -212,6 +207,7 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         sanitizeDictionary = dialogs.SanitizeDictionary()
         sanitizeDictionary.exec()
 
+    # A Method to open dialog for importing words from Joukahainen xml dictionary
     def bringFromJoukahainen(self):
         joukahainenDialog = dialogs.JoukahainenDialog()
         joukahainenDialog.exec()

@@ -29,7 +29,7 @@
         <string>Sanakirjojen merkistökoodaus </string>
        </property>
        <property name="whatsThis">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Sanakirjoissa käytetty merkistökoodaus. Se on merkitty sekä aff-tiedoston että tavutustiedoston alkuun. Alkuperäinen koodaus on UTF8. ISO-8859-10 on pohjoismaisille kielille tarkoitettu merkistö ja Windows-1252 on windowsin graafisessa käyttöliittymässä yleisesti käytössä oleva merkistö. Olemassa olevan sanakirjan voi muuttaa toiseen merkkilajiin Työkalut-valikosta. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Sanakirjoissa käytetty merkistökoodaus. Se on merkitty sekä aff-tiedoston että tavutustiedoston alkuun. Alkuperäinen koodaus on ISO-8859-1. Se on eurooppalaisille kielille tarkoitettu merkistö, joka tukee skandinaavisia merkkejä (å, ä ja ö) Vaihtoehtoina ovat UTF8 sekä Windows-1252, joka on windowsin graafisessa käyttöliittymässä yleisesti käytössä oleva merkistö. Olemassa olevan sanakirjan voi muuttaa toiseen merkkilajiin Työkalut-valikosta. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <item>
         <property name="text">

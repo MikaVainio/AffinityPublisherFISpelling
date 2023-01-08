@@ -1,4 +1,13 @@
+# MODULE FOR SPELL CHECKING DICTIONARY MAINTENANCE OPERATIONS
+# ===========================================================
+
+# LIBRARIES AND MODULES
+# ---------------------
 import xml.etree.ElementTree as ET
+import unicodedata as ud
+
+# CLASS DEFINITIONS
+# -----------------
 
 class MaintenanceOperation():
     """For updating the spelling dictionary."""
@@ -7,6 +16,7 @@ class MaintenanceOperation():
         self.dictionaryFile = dictionaryFile
         self.encoding = encoding
 
+    # A method to add several words to the spelling dictionary
     def addSeveralWordsToDictionaryFile(self, wordList):
         """Adds a list of words to dictionary file, removes duplicates,
         sorts the dictionary and updates the word counter
@@ -20,24 +30,25 @@ class MaintenanceOperation():
         amntWords = len(wordList)
         with open(self.dictionaryFile, 'a', encoding=self.encoding) as file:
             for word in wordList:
-                lineToAdd = word + '\n'
-                file.write(lineToAdd)
-
+                if word.isalpha(): # Check for non alpha characters
+                    lineToAdd = word + '\n'
+                    file.write(lineToAdd)           
         results = self.dictionaryWODuplicates()
-        numberOfDuplicates = results[1] - results[0]
+        numberWODuplicates = results[1] - results[0]
         distinctWords = results[2]
         sortedDistinctWords = sorted(distinctWords)
         self.writeBackToDictionaryFile(sortedDistinctWords)
-        
-        result = f'Tryint to add {amntWords} words to the dictionary. {numberOfDuplicates} were finally added'
+        result = f'Tryint to add {amntWords} words to the dictionary. {numberWODuplicates} were finally added'
         return result
 
+    # A method to write updated data back to the dictionary file
     def writeBackToDictionaryFile(self, wordList):
         wordCount = str(len(wordList)) +'\n'
         with open(self.dictionaryFile, 'w', encoding=self.encoding) as file:
             file.write(wordCount)
             file.writelines(wordList)
     
+    # A method for removing duplicates from the spelling dictionary
     def dictionaryWODuplicates(self):
         """Removes duplicates from the spelling dictionary.
 
@@ -57,6 +68,7 @@ class MaintenanceOperation():
             result = (originalRowCount, rowCount, distinctList)
         return result 
 
+    # A method for reading Joukahainen spelling dictionary (xml file) to a list
     def readFromJoukahainen(self, xmlFile):
         """Reads words from Joukahainen xml based word dictionary
 
@@ -71,13 +83,19 @@ class MaintenanceOperation():
         words = []
         for node in root.findall('./word/forms/form'):
             correctedWord = node.text.replace('=', '') # Remove egual signs from words
-            words.append(correctedWord)
 
-        # TODO: Poista print-komennot kun testattu
-        print(words)
-        print(len(words))
+            # Change the UTF8 encoded words to correct character encoding
+            utfNormalized = ud.normalize('NFKC', correctedWord).encode(self.encoding,'ignore').decode(self.encoding) 
+            words.append(utfNormalized)
         return words
-
-    
+    # TODO: Tee tämä loppuun
+    # A method for converting the spelling dictionary to a different character encoding
+    def changeEncoding(self, targetFile, targetEncoding):
+        pass 
+if __name__ == "__main__":
+    maintenanceOperation = MaintenanceOperation('testi.dic','iso8859-1')
+    result = maintenanceOperation.readFromJoukahainen('C:\\Users\\MikaV\\Downloads\\joukahainen.xml')
+    print(result)
+    print(len(result))   
 
 
