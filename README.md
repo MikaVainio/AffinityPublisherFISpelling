@@ -24,10 +24,10 @@ You can download dictionary files by clicking the green Code button on the top r
 
 Open the folder by clicking `Open` then copy the unzipped dictonary files to this folder. In **Windows** copy `fi_FI.aff`, `fi_FI.dic` and `hyph_fi_FI.dic`. If you are using **Mac** computer copy only `hyph_fi_FI.dic`. 
 
-In **Mac** computers (as macOS Ventura 13.1) put the hyphention file into folder `fi-Fi`. You must create this forlder first. For the correct path see the followin picture:
+In **Mac** computers (as macOS Ventura 13.1) put the hyphention file into folder `fi-Fi`. You must create this forlder first. For the correct path see the following picture:
 
 <img width="377" alt="image" src="https://user-images.githubusercontent.com/24242044/211194689-19258797-d408-4af3-9aef-ec9312fe4b82.png">
 
 
 ## Tools for updating and cleaning the spelling dictionary
-The structure of `fi_FI.dic` is very simple: On the 1st row there is a word counter, and the rest contain words in an alphabetical order, one word per row. The purpose of this repository is to provide simple tools for adding, sorting, and removing duplicates from the spelling dictionary. With appropriate tools, the dictionary can be maintained and expanded to meet our requirements. All tools can be used from a single GUI. You can add words to the speling dictonary, maintain integrity of the dictionary and import words from **Joukahainen** dictionary.
+The structure of `fi_FI.dic` is very simple: On the 1st row there is a word counter, and the rest contain words in an alphabetical order, one word per row. The purpose of this repository is to provide simple tools for adding, sorting, and removing duplicates from the spelling dictionary. With appropriate tools, the dictionary can be maintained and expanded to meet our requirements. All tools can be used from a single GUI. You can add words to the speling dictonary, maintain integrity of the dictionary and import words from **Joukahainen** dictionary. It is a xml based dictionary used in **Voikko** spell checker. It contains thousands of words not found in the original **hunspell** dictionary. It can be found and downloaded from https://joukahainen.puimula.org/. 
