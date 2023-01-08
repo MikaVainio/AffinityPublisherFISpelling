@@ -4,29 +4,21 @@ This repository contains 3 files needed in Affinity Publisher for hyphenation an
 
 ## Files to get started with Finnish spelling and hyphenation
 
-The `fi_FI.aff` file contains basic information how Finnish words are constructed. In the beginning, there is an instruction to set a correct character set. Original affix file uses **ISO8859-1** encoding. According to tests, I have been able to conduct that its works well with Finnish Windows 10. Further testing will be made with different operating systems and language versions in the future. Latest macOS versions have builtin support for Finnish language and there is no need for an additional spelling dictionary. But automatic hyphenation needs a dictionary. Only hyphenation dictionary `hyph_fi_FI.dic` is needed. Do not install other Hunspell dictionaries to your Mac. There may be other sources of these files with **UTF8** encoding. In those files, the character setting on 1st row must be `SET ISO8859-1` to make spelling and hyphenation function properly. Wrong character encoding settings may add duplicate suggestions or display strange characters. The following screen shot shows correct suggestions when the encoding is set to `ISO8859-1`:
+The `fi_FI.aff` file contains basic information how Finnish words are constructed. In the beginning, there is an instruction to set a correct character set. Original affix file uses **ISO8859-1** encoding. According to tests, I have been able to conduct that its works well with Finnish Windows 10. Further testing will be made with different operating systems and language versions in the future. Latest macOS versions have builtin support for Finnish language and there is no need for an additional spelling dictionary. But automatic hyphenation needs a dictionary. Only hyphenation dictionary `hyph_fi_FI.dic` is needed. Do not install other Hunspell dictionaries to your Mac. Instructions can be found on Wiki pages. There may be other sources of these files with **UTF8** encoding. In those files, the character setting on 1st row must be `SET ISO8859-1` to make spelling and hyphenation function properly. Wrong character encoding settings may add duplicate suggestions or display strange characters. The following screen shot shows correct suggestions when using dictionaries downloaded from this repository:
 
 ![image](https://user-images.githubusercontent.com/24242044/205984577-ac7ab74b-f8fe-4bb8-8969-bd34ba0f276a.png)
 
-If the encoding is set to UTF8, incorrect suggestions are shown:
+## Tool to update the spelling dictionary
+There is a tool for updating Finish spelling dictionary. You cand add new words, import words from **Joukahainen** dictionary and maintain your dictionary with the Spelling Maintenance Tool.
 
+## About dictionary files
 
-![image](https://user-images.githubusercontent.com/24242044/205985457-24b283d5-182d-477e-9edb-06203626bf6b.png)
+The `fi_FI.dic` file is a collection of Finnish words. There is a word counter at the beginning of the file. Affinity Publisher does not maintain this file. If you teach new words to Publisher, they are stored outside of this file. You can add words to this file with the Spelling Maintenance Tool.
 
-...and some suggestions are duplicated:
-
-![image](https://user-images.githubusercontent.com/24242044/205986888-da047e28-2280-4256-a0e1-70709af388b5.png)
-
-But when the character setting is correct, no unwanted behavior is observed:
-
-![image](https://user-images.githubusercontent.com/24242044/205987987-97b25ae8-9c62-4960-a032-e59973fcd8a2.png)
-
-The `fi_FI.dic` file is a collection of Finnish words. There is a word counter at the beginning of the file. Affinity Publisher does not maintain this file. If you teach new words to Publisher, they are stored outside of this file.
-
-The `hyph_fi_FI.dic` file contains instructions how to split words for hyphenation. There is also a character set definition on the 1st row. 
+The `hyph_fi_FI.dic` file contains instructions how to split words for hyphenation. There is also a character set definition on the 1st row. To hyphenate correctly this file must be installed to a certain folder in your system. See 
 
 ## Installing files 
-You can download dictionary files by clicking the green Code button on the top right-hand corner. Unzip the contents to Affinity's Dictionaries folder. You can find this location in the app, through `Edit - Preferences - Tools`
+You can download dictionary files by clicking the green Code button on the top right-hand corner. Unzip the contents to Affinity's Dictionaries folder. In Windows you can find this location in Affinity Publisher, through `Edit - Preferences - Tools`. 
 
 ![image](https://user-images.githubusercontent.com/24242044/205483402-095cd467-d668-45f7-826c-2dee38fca26b.png)
 
