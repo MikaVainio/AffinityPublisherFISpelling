@@ -65,6 +65,7 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         self.actionSanityCheck.triggered.connect(self.sanityCheck)
 
         # Open Lisää Joukahaisesta... dialog
+        self.actionAddFromJoukahainen.triggered.connect(self.bringFromJoukahainen)
 
         # Open Muunna merkistö... dialog
         # PUSH BUTTONS
@@ -89,9 +90,6 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         self.wordsList = self.wordsListWidget
         self.wordsList.itemDoubleClicked.connect(self.wordsListEdit)
         self.wordsList.itemSelectionChanged.connect(self.enableSaveSelectedPB)
-
-    
-
 
     # A method to open the settings dialog
     def openSettings(self):
@@ -135,6 +133,7 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         self.settings['theme'] = 'my_theme.xml'
         dialogs.saveSettingsToJsonFile('settings.json', self.settings)
 
+    # A method for sizing UI texts and other UI elements
     def changeElementSize(self):
         setSize = dialogs.SetSize()
         setSize.exec()
@@ -166,33 +165,31 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
             row = self.wordsList.row(item)
             addList.append(item.text())
             self.wordsList.takeItem(row)
-        self.saveSelectedPB.setEnabled(False)
-        print(addList)
-        # FIXME: Merkistökoodaus puuttuu!
-        #
+        self.saveSelectedPB.setEnabled(False) 
         currentSettings = dialogs.settingsFromJsonFile('settings.json')
         dictionaryFile = currentSettings['dictionary']
         encoding = currentSettings['encoding']
         maintenanceOperation =  dictionaryMaintain.MaintenanceOperation(dictionaryFile, encoding)
         result = maintenanceOperation.addSeveralWordsToDictionaryFile(addList)
 
-        #maintainDictionary = consoleMaintain.MaintainDictionary(self.settings['dictionary'])
-        #result = maintainDictionary.addSeveralWordsToDictionaryFile(addList)
-        print(result)
-    # TODO: lisää kirjoitus tiedostoon
-    # A method to save all words into the spelling dictionary
+    # A method to save all words into the spelling dictionary  
     def saveAll(self):
+        addList = []
         count = self.wordsList.count()
         for row in range(count):
-            print(self.wordsList.item(row).text())
+            addList.append(self.wordsList.item(row).text())
         self.wordsList.clear()
+        currentSettings = dialogs.settingsFromJsonFile('settings.json')
+        dictionaryFile = currentSettings['dictionary']
+        encoding = currentSettings['encoding']
+        maintenanceOperation =  dictionaryMaintain.MaintenanceOperation(dictionaryFile, encoding)
+        maintenanceOperation.addSeveralWordsToDictionaryFile(addList)
         self.saveAllPB.setEnabled(False)
 
     # A method to enable and disable Tallenna kaikki push button
     def enableSaveAll(self):
         count = self.wordsList.count()
         if count > 0:
-            print(count)
             self.saveAllPB.setEnabled(True)
         else:
             self.saveAllPB.setEnabled(False)
@@ -209,6 +206,11 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
     def sanityCheck(self):
         sanitizeDictionary = dialogs.SanitizeDictionary()
         sanitizeDictionary.exec()
+
+    # A Method to open dialog for importing words from Joukahainen xml dictionary
+    def bringFromJoukahainen(self):
+        joukahainenDialog = dialogs.JoukahainenDialog()
+        joukahainenDialog.exec()
 
 if __name__ == "__main__":
 
