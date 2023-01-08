@@ -13,7 +13,7 @@ There is a tool for updating Finish spelling dictionary. You cand add new words,
 
 ![image](https://user-images.githubusercontent.com/24242044/211196521-dfa23b39-4b66-4697-8dc1-55c82eb888fc.png)
 
-New words can be typed to _Lisättävä sana_ field (1). By hitting the enter key word will be added to a list of words _Sanaluettelo_ (2). By pressing buttons (3) words will be saved to the spelling dictionary. _Tallenna valitut_ will save sellected words from the list and _Tallenna kaiki_ will save all words in the list. By double clicking a word in the list will remove it from the list(2) and put it back to input field (1). Word can be deleted with keys or by pressing the x symbol in the field.
+New words can be typed to _Lisättävä sana_ field (1). By hitting the enter key the word will be added to a list of words _Sanaluettelo_ (2). By pressing buttons (3) words will be saved to the spelling dictionary. _Tallenna valitut_ will save sellected words from the list and _Tallenna kaiki_ will save all words in the list. By double clicking a word in the list will remove it from the list(2) and put it back to input field (1). Word can be deleted with keys or by pressing the x symbol in the field.
 
 ## About dictionary files
 
