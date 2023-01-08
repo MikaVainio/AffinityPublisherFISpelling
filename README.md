@@ -1,6 +1,6 @@
 # Files and a tools for Finnish hyphenation and spelling in Affinity Publisher v2
 
-This repository contains 3 files needed in Affinity Publisher for hyphenation and spell-checking of the Finnish language on Windows computers. These files have been forked from https://www.apt-browse.org/browse/debian/wheezy/main/all/myspell-fi/0.7-18/file/usr/share/hunspell. At the moment, the original hunspell dictionary contains some repeating and unsorted word blocks. These have been removed in this repository.
+This repository contains 3 files needed in Affinity Publisher for hyphenation and spell-checking of the Finnish language on **Windows** computers. These files have been forked from https://www.apt-browse.org/browse/debian/wheezy/main/all/myspell-fi/0.7-18/file/usr/share/hunspell. At the moment, the original hunspell dictionary contains some repeating and unsorted word blocks. These have been removed in this repository. **Mac** users may need hyphenation dictionary because the automatic hyphenation language does not work as expected.
 
 ## Files to get started with Finnish spelling and hyphenation
 
@@ -15,7 +15,7 @@ There is a tool for updating Finish spelling dictionary. You cand add new words,
 
 The `fi_FI.dic` file is a collection of Finnish words. There is a word counter at the beginning of the file. Affinity Publisher does not maintain this file. If you teach new words to Publisher, they are stored outside of this file. You can add words to this file with the Spelling Maintenance Tool.
 
-The `hyph_fi_FI.dic` file contains instructions how to split words for hyphenation. There is also a character set definition on the 1st row. To hyphenate correctly this file must be installed to a certain folder in your system. See 
+The `hyph_fi_FI.dic` file contains instructions how to split words for hyphenation. There is also a character set definition on the 1st row. To hyphenate correctly this file must be installed to a certain folder in your system.
 
 ## Installing files 
 You can download dictionary files by clicking the green Code button on the top right-hand corner. Unzip the contents to Affinity's Dictionaries folder. In **Windows** you can find this location in Affinity Publisher, through `Edit - Preferences - Tools`. 
@@ -23,6 +23,11 @@ You can download dictionary files by clicking the green Code button on the top r
 ![image](https://user-images.githubusercontent.com/24242044/205483402-095cd467-d668-45f7-826c-2dee38fca26b.png)
 
 Open the folder by clicking `Open` then copy the unzipped dictonary files to this folder. In **Windows** copy `fi_FI.aff`, `fi_FI.dic` and `hyph_fi_FI.dic`. If you are using **Mac** computer copy only `hyph_fi_FI.dic`. 
+
+In **Mac** computers (as macOS Ventura 13.1) put the hyphention file into folder `fi-Fi`. You must create this forlder first. See the followinf picture:
+
+<img width="377" alt="image" src="https://user-images.githubusercontent.com/24242044/211194689-19258797-d408-4af3-9aef-ec9312fe4b82.png">
+
 
 ## Tools for updating and cleaning the spelling dictionary
 The structure of `fi_FI.dic` is very simple: On the 1st row there is a word counter, and the rest contain words in an alphabetical order, one word per row. The purpose of this repository is to provide simple tools for adding, sorting, and removing duplicates from the spelling dictionary. With appropriate tools, the dictionary can be maintained and expanded to meet our requirements. All tools can be used from a single GUI. You can add words to the speling dictonary, maintain integrity of the dictionary and import words from **Joukahainen** dictionary.
