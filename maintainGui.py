@@ -4,11 +4,13 @@
 # LIBRARIES AND MODULES
 # ---------------------
 
-import sys # For accessing system parameters
-import os # For file path handling
-from PyQt5 import QtCore, QtWidgets # For the Qt functionality
-from PyQt5.uic import loadUi # For loading the UI file
-from qt_material import QtStyleTools, apply_stylesheet # For theme adjustments
+import sys  # For accessing system parameters
+import os  # For file path handling
+from PyQt5 import QtWidgets  # For the Qt functionality
+from PyQt5.QtGui import QDesktopServices  # To show web pages
+from PyQt5.QtCore import QUrl  # For defining the URL of a web page to open
+from PyQt5.uic import loadUi  # For loading the UI file
+from qt_material import QtStyleTools, apply_stylesheet  # For theme adjustments
 import dialogs
 import dictionaryMaintain
 
@@ -39,8 +41,9 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         self.extra = {'density_scale': f'{scale}'}
 
         # Use latest chosen theme
-        apply_stylesheet(self.main, theme=self.settings['theme'], extra=self.extra)
-                
+        apply_stylesheet(
+            self.main, theme=self.settings['theme'], extra=self.extra)
+
         # MENU ACTIONS
 
         # Open the settings
@@ -65,14 +68,17 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         self.actionSanityCheck.triggered.connect(self.sanityCheck)
 
         # Open Lisää Joukahaisesta... dialog
-        self.actionAddFromJoukahainen.triggered.connect(self.bringFromJoukahainen)
+        self.actionAddFromJoukahainen.triggered.connect(
+            self.bringFromJoukahainen)
 
-        # Open Muunna merkistö... dialog
+        # Open Help in the default browser
+        self.actionWikiPage.triggered.connect(self.openWiki)
+        
         # PUSH BUTTONS
 
         # Tallenna kaikki push button, adds all words to the dictionary file
         self.saveAllPB = self.addAllPushButton
-        self.saveAllPB.setEnabled(False) 
+        self.saveAllPB.setEnabled(False)
         self.saveAllPB.clicked.connect(self.saveAll)
 
         # Tallenna valitut push button, adds selected words to the dictionary file
@@ -81,7 +87,7 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         self.saveSelectedPB.clicked.connect(self.saveSelected)
 
         # INPUTS & OUTPUTS
-        
+
         # A line edit for a new word
         self.wordInput = self.wordToAddLineEdit
         self.wordInput.returnPressed.connect(self.addToList)
@@ -104,14 +110,14 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         apply_stylesheet(self.main, theme='dark_amber.xml', extra=self.extra)
         self.settings['theme'] = 'dark_amber.xml'
         dialogs.saveSettingsToJsonFile('settings.json', self.settings)
-        print('dark', self.settings)
 
     # A method to apply the light theme
     def setLightTheme(self):
         self.settings = dialogs.settingsFromJsonFile('settings.json')
         scale = self.settings['scale']
         self.extra = {'density_scale': f'{scale}'}
-        apply_stylesheet(self.main, theme='light_cyan_500.xml', extra=self.extra)
+        apply_stylesheet(
+            self.main, theme='light_cyan_500.xml', extra=self.extra)
         self.settings['theme'] = 'light_cyan_500.xml'
         dialogs.saveSettingsToJsonFile('settings.json', self.settings)
 
@@ -120,7 +126,8 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         self.settings = dialogs.settingsFromJsonFile('settings.json')
         scale = self.settings['scale']
         self.extra = {'density_scale': f'{scale}'}
-        apply_stylesheet(self.main, theme='default_theme.xml', extra=self.extra)
+        apply_stylesheet(self.main, theme='default_theme.xml',
+                         extra=self.extra)
         self.settings['theme'] = 'default_theme.xml'
         dialogs.saveSettingsToJsonFile('settings.json', self.settings)
 
@@ -140,11 +147,12 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         self.settings = dialogs.settingsFromJsonFile('settings.json')
         scale = self.settings['scale']
         self.extra = {'density_scale': f'{scale}'}
-        apply_stylesheet(self.main, theme=self.settings['theme'], extra=self.extra)
+        apply_stylesheet(
+            self.main, theme=self.settings['theme'], extra=self.extra)
 
     # A method to send word from the line edit to the word list
     def addToList(self):
-        item = self.wordInput.text().strip() # Clean white spaces
+        item = self.wordInput.text().strip()  # Clean white spaces
         if item != '':
             self.wordsList.addItem(item)
             self.wordInput.clear()
@@ -165,14 +173,15 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
             row = self.wordsList.row(item)
             addList.append(item.text())
             self.wordsList.takeItem(row)
-        self.saveSelectedPB.setEnabled(False) 
+        self.saveSelectedPB.setEnabled(False)
         currentSettings = dialogs.settingsFromJsonFile('settings.json')
         dictionaryFile = currentSettings['dictionary']
         encoding = currentSettings['encoding']
-        maintenanceOperation =  dictionaryMaintain.MaintenanceOperation(dictionaryFile, encoding)
+        maintenanceOperation = dictionaryMaintain.MaintenanceOperation(
+            dictionaryFile, encoding)
         result = maintenanceOperation.addSeveralWordsToDictionaryFile(addList)
 
-    # A method to save all words into the spelling dictionary  
+    # A method to save all words into the spelling dictionary
     def saveAll(self):
         addList = []
         count = self.wordsList.count()
@@ -182,7 +191,8 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         currentSettings = dialogs.settingsFromJsonFile('settings.json')
         dictionaryFile = currentSettings['dictionary']
         encoding = currentSettings['encoding']
-        maintenanceOperation =  dictionaryMaintain.MaintenanceOperation(dictionaryFile, encoding)
+        maintenanceOperation = dictionaryMaintain.MaintenanceOperation(
+            dictionaryFile, encoding)
         maintenanceOperation.addSeveralWordsToDictionaryFile(addList)
         self.saveAllPB.setEnabled(False)
 
@@ -212,11 +222,18 @@ class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
         joukahainenDialog = dialogs.JoukahainenDialog()
         joukahainenDialog.exec()
 
+    # A method for opening Help page in Github Wiki
+    def openWiki(self):
+        url = QUrl(
+            'https://github.com/MikaVainio/AffinityPublisherFISpelling/wiki/Ohje-suomeksi')
+        QDesktopServices.openUrl(url)
+
+
 if __name__ == "__main__":
 
     # Create the application
     app = QtWidgets.QApplication(sys.argv)
-    
+
     # Create the Main Window object from MainWindow class and show it on the screen
     appWindow = MainWindow()
     appWindow.main.show()

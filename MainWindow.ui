@@ -134,7 +134,7 @@
      <x>0</x>
      <y>0</y>
      <width>293</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSettings">
@@ -159,6 +159,7 @@
     <property name="title">
      <string>Ohje</string>
     </property>
+    <addaction name="actionWikiPage"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -216,6 +217,11 @@
   <action name="actionSize">
    <property name="text">
     <string>Koko...</string>
+   </property>
+  </action>
+  <action name="actionWikiPage">
+   <property name="text">
+    <string>Wiki-sivut</string>
    </property>
   </action>
  </widget>

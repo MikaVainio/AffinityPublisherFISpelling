@@ -9,10 +9,12 @@ import unicodedata as ud
 # CLASS DEFINITIONS
 # -----------------
 
+
 class MaintenanceOperation():
     """For updating the spelling dictionary."""
+
     def __init__(self, dictionaryFile, encoding):
-        
+
         self.dictionaryFile = dictionaryFile
         self.encoding = encoding
 
@@ -30,9 +32,9 @@ class MaintenanceOperation():
         amntWords = len(wordList)
         with open(self.dictionaryFile, 'a', encoding=self.encoding) as file:
             for word in wordList:
-                if word.isalpha(): # Check for non alpha characters
+                if word.isalpha():  # Check for non alpha characters
                     lineToAdd = word + '\n'
-                    file.write(lineToAdd)           
+                    file.write(lineToAdd)
         results = self.dictionaryWODuplicates()
         numberWODuplicates = results[1] - results[0]
         distinctWords = results[2]
@@ -43,11 +45,11 @@ class MaintenanceOperation():
 
     # A method to write updated data back to the dictionary file
     def writeBackToDictionaryFile(self, wordList):
-        wordCount = str(len(wordList)) +'\n'
+        wordCount = str(len(wordList)) + '\n'
         with open(self.dictionaryFile, 'w', encoding=self.encoding) as file:
             file.write(wordCount)
             file.writelines(wordList)
-    
+
     # A method for removing duplicates from the spelling dictionary
     def dictionaryWODuplicates(self):
         """Removes duplicates from the spelling dictionary.
@@ -58,7 +60,8 @@ class MaintenanceOperation():
         """
 
         with open(self.dictionaryFile, 'r', encoding=self.encoding) as file:
-            originalRowCount = int(file.readline())  # Read the 1st line containing row count
+            # Read the 1st line containing row count
+            originalRowCount = int(file.readline())
             originalList = file.readlines()
             # Change to a Python dictionary which does not allow duplicate keys
             dictionaryFromList = dict.fromkeys(originalList)
@@ -66,7 +69,7 @@ class MaintenanceOperation():
             distinctList = list(dictionaryFromList)
             rowCount = len(distinctList)
             result = (originalRowCount, rowCount, distinctList)
-        return result 
+        return result
 
     # A method for reading Joukahainen spelling dictionary (xml file) to a list
     def readFromJoukahainen(self, xmlFile):
@@ -82,20 +85,19 @@ class MaintenanceOperation():
         root = xmlTree.getroot()
         words = []
         for node in root.findall('./word/forms/form'):
-            correctedWord = node.text.replace('=', '') # Remove egual signs from words
+            # Remove egual signs from words
+            correctedWord = node.text.replace('=', '')
 
             # Change the UTF8 encoded words to correct character encoding
-            utfNormalized = ud.normalize('NFKC', correctedWord).encode(self.encoding,'ignore').decode(self.encoding) 
+            utfNormalized = ud.normalize('NFKC', correctedWord).encode(
+                self.encoding, 'ignore').decode(self.encoding)
             words.append(utfNormalized)
         return words
-    # TODO: Tee tämä loppuun
-    # A method for converting the spelling dictionary to a different character encoding
-    def changeEncoding(self, targetFile, targetEncoding):
-        pass 
+
+
 if __name__ == "__main__":
-    maintenanceOperation = MaintenanceOperation('testi.dic','iso8859-1')
-    result = maintenanceOperation.readFromJoukahainen('C:\\Users\\MikaV\\Downloads\\joukahainen.xml')
+    maintenanceOperation = MaintenanceOperation('testi.dic', 'iso8859-1')
+    result = maintenanceOperation.readFromJoukahainen(
+        'C:\\Users\\MikaV\\Downloads\\joukahainen.xml')
     print(result)
-    print(len(result))   
-
-
+    print(len(result))

@@ -4,18 +4,20 @@
 # LIBRARIES AND MODULES
 import os
 import json
-import dictionaryMaintain 
+import dictionaryMaintain
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
-from qt_material import apply_stylesheet # For theme adjustments
+from qt_material import apply_stylesheet  # For theme adjustments
 
 # CLASS DEFINITIONS
 
+
 class SettingsHandler(QDialog):
     """Reads and writes application settings file."""
+
     def __init__(self):
         super().__init__()
-    
+
         loadUi('settingsDialog.ui', self)
         self.setWindowTitle('Sanakirja-asetukset')
 
@@ -39,9 +41,10 @@ class SettingsHandler(QDialog):
         self.encodingCB.setCurrentText(self.characterEncoding)
 
     # A Method for changing the spelling dictionary
-    def fileDialog(self):     
+    def fileDialog(self):
         self.fileLE.setText(self.currentDictionary)
-        fileName, check = QFileDialog.getOpenFileName(None, 'Valitse sanakirja', self.currentDictionary, 'Sanakirjat (*.dic *.aff)')
+        fileName, check = QFileDialog.getOpenFileName(
+            None, 'Valitse sanakirja', self.currentDictionary, 'Sanakirjat (*.dic *.aff)')
         if fileName:
             self.fileLE.setText(os.path.normpath(fileName))
 
@@ -52,8 +55,10 @@ class SettingsHandler(QDialog):
         saveSettingsToJsonFile('settings.json', self.settings)
         self.close()
 
+
 class SetSize(QDialog):
     """Increases or decreases the size of UI elements."""
+
     def __init__(self):
         super().__init__()
 
@@ -77,21 +82,22 @@ class SetSize(QDialog):
 
     def changeSize(self):
         self.newSize = str(self.sizeSB.value())
-        print(self.newSize)
         self.newExtra = {'density_scale': f'{self.newSize}'}
-        apply_stylesheet(self, theme=self.settings['theme'], extra=self.newExtra)
+        apply_stylesheet(
+            self, theme=self.settings['theme'], extra=self.newExtra)
 
     def saveSizeSetting(self):
         self.settings['scale'] = self.newSize
-        print(self.newSize)
         saveSettingsToJsonFile('settings.json', self.settings)
         self.close()
 
+
 class SanitizeDictionary(QDialog):
     """Sorts dictionary, removes duplicates and updates the word counter."""
+
     def __init__(self):
         super().__init__()
-    
+
         loadUi('sanitizeDictionary.ui', self)
         self.setWindowTitle('Sanakirjan tarkistus ja korjaus')
         self.settings = settingsFromJsonFile('settings.json')
@@ -110,11 +116,12 @@ class SanitizeDictionary(QDialog):
         self.okPB = self.okPushButton
         self.okPB.clicked.connect(self.saveSanitized)
 
-        self.anlyzeData = self.sanitize(self.currentDictionary, self.characterEncoding)
+        self.anlyzeData = self.sanitize(
+            self.currentDictionary, self.characterEncoding)
         self.inFileLcd.display(int(self.anlyzeData[0]))
         self.actualLcd.display(int(self.anlyzeData[1]))
         self.finalLcd.display(int(self.anlyzeData[2]))
-    
+
     def sanitize(self, dictionary, encoding):
         """Reads the spelling dictionary, remove duplicates, sort and recount words
 
@@ -129,7 +136,7 @@ class SanitizeDictionary(QDialog):
             originalWordCount = file.readline()
             unsortedDictionary = file.readlines()
             sortedDictionary = sorted(unsortedDictionary)
-            realWordCount = str(len(sortedDictionary)) +'\n'
+            realWordCount = str(len(sortedDictionary)) + '\n'
             # Change to a Python dictionary which does not allow duplicate keys
             dictionaryFromList = dict.fromkeys(sortedDictionary)
             # Make it an ordinary list again
@@ -139,15 +146,17 @@ class SanitizeDictionary(QDialog):
             self.sanitizedWordCount = finalRowCount
             self.sanitizedWordList = distinctList
         return result
-        
+
     def saveSanitized(self):
         with open(self.currentDictionary, 'w', encoding=self.characterEncoding) as file:
-                file.write(str(self.sanitizedWordCount) + '\n')
-                file.writelines(self.sanitizedWordList)
+            file.write(str(self.sanitizedWordCount) + '\n')
+            file.writelines(self.sanitizedWordList)
         self.close()
+
 
 class JoukahainenDialog(QDialog):
     """Dialog for getting words from Joukahainen dictionary."""
+
     def __init__(self):
         super().__init__()
 
@@ -163,32 +172,32 @@ class JoukahainenDialog(QDialog):
         self.xmlLE = self.xmlFileLineEdit
         self.browsePB = self.browsePushButton
         self.browsePB.clicked.connect(self.fileDialog)
-        self.savePB =self.savePushButton
+        self.savePB = self.savePushButton
         self.savePB.clicked.connect(self.joukahainenToDictionary)
-
 
     def fileDialog(self):
         """A methtod to create Dialog window for choosing Joukahainen xml file
         """
         defaultDirectory = os.path.expanduser('~') + '\\Downloads'
-        print(defaultDirectory)     
-        self.xmlFileName, check = QFileDialog.getOpenFileName(None, 'Valitse Joukahaisen sanasto', defaultDirectory, 'xml-tiestostot (*.xml)')
+        self.xmlFileName, check = QFileDialog.getOpenFileName(
+            None, 'Valitse Joukahaisen sanasto', defaultDirectory, 'xml-tiestostot (*.xml)')
         if self.xmlFileName:
-            self.xmlLE.setText(os.path.normpath(self.xmlFileName))  
+            self.xmlLE.setText(os.path.normpath(self.xmlFileName))
 
     def joukahainenToDictionary(self):
         """A Method to convert and save words of Joukahainen to the spelling dictionary
         """
-        maintenanceOperation = dictionaryMaintain.MaintenanceOperation(self.currentDictionary, self.characterEncoding)
-        self.joukahainenWords = maintenanceOperation.readFromJoukahainen(self.xmlFileName)
-        result = maintenanceOperation.addSeveralWordsToDictionaryFile(self.joukahainenWords)
+        maintenanceOperation = dictionaryMaintain.MaintenanceOperation(
+            self.currentDictionary, self.characterEncoding)
+        self.joukahainenWords = maintenanceOperation.readFromJoukahainen(
+            self.xmlFileName)
+        result = maintenanceOperation.addSeveralWordsToDictionaryFile(
+            self.joukahainenWords)
         print(result)
 
-    
 
-# A function for reading settings from a JSON file 
+# A function for reading settings from a JSON file
 def settingsFromJsonFile(file):
-
     """Reads settings from json file and converts
         json to pyhthon dictionary format
     Args:
@@ -200,17 +209,19 @@ def settingsFromJsonFile(file):
     settingsFile = open(file, 'r')
     settingsData = json.load(settingsFile)
     settingsFile.close()
-    return settingsData        
+    return settingsData
 
-# A method to save connection settings to a JSON file    
+# A method to save connection settings to a JSON file
+
+
 def saveSettingsToJsonFile(file, settingData):
-
     """Writes settings to json file.
     Args:
         file (str): Name of the file to write
         settingData (dict): Dictionary of settings
     """
-    
-    settingsFile = open(file, 'w') # Opens settings file for writing
-    json.dump(settingData, settingsFile) # Write dictionary in JSON format to file
-    settingsFile.close() # Close the file after
+
+    settingsFile = open(file, 'w')  # Opens settings file for writing
+    # Write dictionary in JSON format to file
+    json.dump(settingData, settingsFile)
+    settingsFile.close()  # Close the file after
