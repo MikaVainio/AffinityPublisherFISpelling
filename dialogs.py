@@ -55,6 +55,30 @@ class SettingsHandler(QDialog):
         saveSettingsToJsonFile('settings.json', self.settings)
         self.close()
 
+    # TODO: lisää virheenkäsittely kaikkiin tiedosto-operaatioihin
+    # Create an alert dialog for critical failures
+    def alert(self, windowTitle, alertMsg, additionalMsg, details):
+        """Creates a message box for critical errors
+        Args:
+            windowTitle (str): Title of the message box
+            alertMsg (str): Short description of the error in Finnish
+            additionalMsg (str): Additional information in Finnish
+            details (str): Details about the error in English
+        """
+        alertDialog = QMessageBox()  # Create a message box object
+        # Add appropriate title to the message box
+        alertDialog.setWindowTitle(windowTitle)
+        alertDialog.setIcon(QMessageBox.Critical)  # Set icon to critical
+        # Basic information about the error in Finnish
+        alertDialog.setText(alertMsg)
+        # Additional information about the error in Finnish
+        alertDialog.setInformativeText(additionalMsg)
+        # Technical details in English (from psycopg2)
+        alertDialog.setDetailedText(details)
+        # Only OK is needed to close the dialog
+        alertDialog.setStandardButtons(QMessageBox.Ok)
+        alertDialog.exec_()  # Open the message box
+
 
 class SetSize(QDialog):
     """Increases or decreases the size of UI elements."""
@@ -81,10 +105,13 @@ class SetSize(QDialog):
         self.savePB.clicked.connect(self.saveSizeSetting)
 
     def changeSize(self):
-        self.newSize = str(self.sizeSB.value())
-        self.newExtra = {'density_scale': f'{self.newSize}'}
-        apply_stylesheet(
-            self, theme=self.settings['theme'], extra=self.newExtra)
+        try:
+            self.newSize = str(self.sizeSB.value())
+            self.newExtra = {'density_scale': f'{self.newSize}'}
+            apply_stylesheet(self, theme=self.settings['theme'], extra=self.newExtra)
+        except (Exception) as error:
+            pass
+        
 
     def saveSizeSetting(self):
         self.settings['scale'] = self.newSize
