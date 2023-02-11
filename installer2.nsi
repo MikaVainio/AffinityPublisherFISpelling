@@ -42,7 +42,7 @@
 
 # Language Selection Dialog Settings
 
-  # Remember the installer language
+  # Remember the installer language -> language not asked when installer restarted
   !define MUI_LANGDLL_REGISTRY_ROOT "HKCU" 
   !define MUI_LANGDLL_REGISTRY_KEY "Software\Hunspell Dictionary Maintainer" 
   !define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
@@ -54,6 +54,7 @@
 
   # License file containing the GNU GPL 3 information
   !insertmacro MUI_PAGE_LICENSE "LICENSE"
+
   !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_DIRECTORY
   
@@ -85,7 +86,7 @@ Section "Dictionary Maintainer" SecProgram
 
   SetOutPath "$INSTDIR"
   
-  # Files to to put in the installation directory the distribution folder
+  # Files to put into the installation directory from the distribution folder
   # TODO: katso tähän oikeat hakemistot ja tiedostot
   File /r "*.aff"
 
