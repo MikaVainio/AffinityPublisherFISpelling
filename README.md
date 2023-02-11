@@ -9,7 +9,7 @@ The `fi_FI.aff` file contains basic information how Finnish words are constructe
 ![image](https://user-images.githubusercontent.com/24242044/205984577-ac7ab74b-f8fe-4bb8-8969-bd34ba0f276a.png)
 
 ## Tool to update the spelling dictionary
-There is a tool for updating Finish spelling dictionary. You cand add new words, import words from **Joukahainen** dictionary and maintain your dictionary with the **Spelling Maintenance Tool**. Insturctions to use the tool are found on Wiki pages or tool's Help menu. Language in the tool is Finnish only assuming that users publishing in Finnish can understand it.
+There is a tool for updating Finish spelling dictionary. You can add new words, import words from **Joukahainen** dictionary and maintain your dictionary with the **Spelling Maintenance Tool**. Insturctions to use the tool are found on Wiki pages or tool's Help menu. Language in the tool is Finnish only assuming that users publishing in Finnish can understand it.
 
 ![image](https://user-images.githubusercontent.com/24242044/211196521-dfa23b39-4b66-4697-8dc1-55c82eb888fc.png)
 
