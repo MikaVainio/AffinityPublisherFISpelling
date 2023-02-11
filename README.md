@@ -1,6 +1,6 @@
 # Files and a tool for Finnish hyphenation and spelling in Affinity Publisher v2
 
-This repository contains 3 files needed in Affinity Publisher for hyphenation and spell-checking of the Finnish language on **Windows** computers. These files have been forked from https://www.apt-browse.org/browse/debian/wheezy/main/all/myspell-fi/0.7-18/file/usr/share/hunspell. At the moment, the original hunspell dictionary contains some repeating and unsorted word blocks. These have been removed in this repository. **Mac** users may need hyphenation dictionary because the automatic hyphenation language does not work as expected.
+This repository contains 3 files needed in Affinity Publisher for hyphenation and spell-checking of the Finnish language on **Windows** computers. These files have been forked from https://www.apt-browse.org/browse/debian/wheezy/main/all/myspell-fi/0.7-18/file/usr/share/hunspell. At the moment, hunspell dictionary found in that apt repository contains some repeating and unsorted word blocks. These have been removed in this Github repository. **Mac** users may need hyphenation dictionary because the automatic hyphenation language choise in Affinity Publisher does not work as expected. 
 
 ## Files to get started with Finnish spelling and hyphenation
 
