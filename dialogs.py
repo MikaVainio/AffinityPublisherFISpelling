@@ -11,7 +11,7 @@ from qt_material import apply_stylesheet  # For theme adjustments
 
 # CLASS DEFINITIONS
 
-
+# Class for handling the settings file
 class SettingsHandler(QDialog):
     """Reads and writes application settings file."""
 
@@ -29,7 +29,8 @@ class SettingsHandler(QDialog):
         self.currentDictionary = self.settings['dictionary']
         self.characterEncoding = self.settings['encoding']
         self.densityScale = self.settings['scale']
-
+        
+        
         # UI elements
         self.browsePB = self.browsePushButton
         self.browsePB.clicked.connect(self.fileDialog)
@@ -40,6 +41,8 @@ class SettingsHandler(QDialog):
         self.encodingCB = self.characterEncodingComboBox
         self.encodingCB.setCurrentText(self.characterEncoding)
 
+    
+        
     # A Method for changing the spelling dictionary
     def fileDialog(self):
         self.fileLE.setText(self.currentDictionary)
@@ -48,37 +51,17 @@ class SettingsHandler(QDialog):
         if fileName:
             self.fileLE.setText(os.path.normpath(fileName))
 
-    # Method for save dictionary settings
+    # Method for saving dictionary settings
     def saveSettings(self):
         self.settings['dictionary'] = self.fileLE.text()
         self.settings['encoding'] = self.encodingCB.currentText()
         saveSettingsToJsonFile('settings.json', self.settings)
         self.close()
+        
 
     # TODO: lisää virheenkäsittely kaikkiin tiedosto-operaatioihin
-    # Create an alert dialog for critical failures
-    def alert(self, windowTitle, alertMsg, additionalMsg, details):
-        """Creates a message box for critical errors
-        Args:
-            windowTitle (str): Title of the message box
-            alertMsg (str): Short description of the error in Finnish
-            additionalMsg (str): Additional information in Finnish
-            details (str): Details about the error in English
-        """
-        alertDialog = QMessageBox()  # Create a message box object
-        # Add appropriate title to the message box
-        alertDialog.setWindowTitle(windowTitle)
-        alertDialog.setIcon(QMessageBox.Critical)  # Set icon to critical
-        # Basic information about the error in Finnish
-        alertDialog.setText(alertMsg)
-        # Additional information about the error in Finnish
-        alertDialog.setInformativeText(additionalMsg)
-        # Technical details in English (from psycopg2)
-        alertDialog.setDetailedText(details)
-        # Only OK is needed to close the dialog
-        alertDialog.setStandardButtons(QMessageBox.Ok)
-        alertDialog.exec_()  # Open the message box
-
+    
+    
 
 class SetSize(QDialog):
     """Increases or decreases the size of UI elements."""
@@ -220,7 +203,31 @@ class JoukahainenDialog(QDialog):
             self.xmlFileName)
         result = maintenanceOperation.addSeveralWordsToDictionaryFile(
             self.joukahainenWords)
-        print(result)
+
+# COMMON FUNCTIONS FOR FILE OPERATIONS
+
+# A function for informing about errors eq insufficient rights to use settings file etc
+def alert(windowTitle, alertMsg, additionalMsg, details):
+    """Creates a message box for critical errors
+    Args:
+        windowTitle (str): Title of the message box
+        alertMsg (str): Short description of the error in Finnish
+        additionalMsg (str): Additional information in Finnish
+        details (str): Details about the error in English
+    """
+    alertDialog = QMessageBox()  # Create a message box object
+    # Add appropriate title to the message box
+    alertDialog.setWindowTitle(windowTitle)
+    alertDialog.setIcon(QMessageBox.Critical)  # Set icon to critical
+    # Basic information about the error in Finnish
+    alertDialog.setText(alertMsg)
+    # Additional information about the error in Finnish
+    alertDialog.setInformativeText(additionalMsg)
+    # Technical details in English (from psycopg2)
+    alertDialog.setDetailedText(details)
+    # Only OK is needed to close the dialog
+    alertDialog.setStandardButtons(QMessageBox.Ok)
+    alertDialog.exec_()  # Open the message box
 
 
 # A function for reading settings from a JSON file
@@ -232,23 +239,25 @@ def settingsFromJsonFile(file):
     Returns:
         dict: Setting parameters
     """
+    try:
+        settingsFile = open(file, 'r')
+        settingsData = json.load(settingsFile)
+        settingsFile.close()
+        return settingsData
+    except Exception as e:
+        alert('Asetusten lukeminen ei onnistunut', 'Virhe avattaessa asetuksia', 'Lisätietoja Details-apinikkeella', str(e))
 
-    settingsFile = open(file, 'r')
-    settingsData = json.load(settingsFile)
-    settingsFile.close()
-    return settingsData
-
-# A method to save connection settings to a JSON file
-
-
+# A Function to save connection settings to a JSON file
 def saveSettingsToJsonFile(file, settingData):
     """Writes settings to json file.
     Args:
         file (str): Name of the file to write
         settingData (dict): Dictionary of settings
     """
-
-    settingsFile = open(file, 'w')  # Opens settings file for writing
-    # Write dictionary in JSON format to file
-    json.dump(settingData, settingsFile)
-    settingsFile.close()  # Close the file after
+    try:
+        settingsFile = open(file, 'w')  # Opens settings file for writing
+        # Write dictionary in JSON format to file
+        json.dump(settingData, settingsFile)
+        settingsFile.close()  # Close the file after
+    except Exception as e:
+        alert('Asetusten tallennus ei onnistunut', 'Virhe tallennettaessa asetuksia', 'Lisätietoja Details-apinikkeella', str(e))
