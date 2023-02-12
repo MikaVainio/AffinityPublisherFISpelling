@@ -87,8 +87,7 @@ Section "Dictionary Maintainer" SecProgram
   SetOutPath "$INSTDIR"
   
   # Files to put into the installation directory from the distribution folder
-  # TODO: katso tähän oikeat hakemistot ja tiedostot
-  File /r "*.aff"
+  File /r "dist\maintainGui\"
 
   # Store installation folder to registry
   WriteRegStr HKCU "Software\Hunspell Dictionary Maintainer" "" $INSTDIR
@@ -100,7 +99,7 @@ Section "Dictionary Maintainer" SecProgram
     
     # Create shortcuts
     CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
-    # TODO: tee käynnistyslinkki
+    CreateShortcut "$SMPROGRAMS\$StartMenuFolder\Maintain Dictionary.lnk" "$INSTDIR\maintainGui.exe"
     CreateShortcut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
   
   !insertmacro MUI_STARTMENU_WRITE_END
@@ -113,6 +112,7 @@ Section "Dictionaries" SecDictionaries
   
   # Dictionary files to put into subdirectory Dictionaries
   File "*.dic"
+  File "*.aff"
 SectionEnd
 
 # --- # Installer Sections end
@@ -148,21 +148,19 @@ FunctionEnd
 # Uninstaller Section
 Section "Uninstall"
 
-  # Remove files and folders from installation directory
-  Delete $INSTDIR\Dictionaries\*.*
-  RMDir $INSTDIR\Dictionaries
-  Delete $INSTDIR\*.*
-  RMDir "$INSTDIR"
+  # Remove files and folders from installation directory, if not successfull remove after reboot
+  RMDir /r /REBOOTOK $INSTDIR
   
   !insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuFolder
 
   # Remove start menu items  
+  Delete "$SMPROGRAMS\$StartMenuFolder\Maintain Dictionary.lnk"
   Delete "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"
   RMDir "$SMPROGRAMS\$StartMenuFolder"
   
-  # Clean the registry
-  # FIXME: Muuta niin, että poistaa rekisterimerkinnät ensin
-  DeleteRegKey /ifempty HKCU "Software\Hunspell Dictionary Maintainer"
+  # Clean the registry by removing all keys under Hunspell Dictionary Maintainer
+  
+  DeleteRegKey HKCU "Software\Hunspell Dictionary Maintainer"
 
 SectionEnd
 
