@@ -58,11 +58,8 @@ class SettingsHandler(QDialog):
         saveSettingsToJsonFile('settings.json', self.settings)
         self.close()
         
-
-    # TODO: lisää virheenkäsittely kaikkiin tiedosto-operaatioihin
     
-    
-
+# A class for setting element sizes in all UIs    
 class SetSize(QDialog):
     """Increases or decreases the size of UI elements."""
 
@@ -101,7 +98,7 @@ class SetSize(QDialog):
         saveSettingsToJsonFile('settings.json', self.settings)
         self.close()
 
-
+# A class for separate cleaning dialog for the dictionary
 class SanitizeDictionary(QDialog):
     """Sorts dictionary, removes duplicates and updates the word counter."""
 
@@ -163,7 +160,7 @@ class SanitizeDictionary(QDialog):
             file.writelines(self.sanitizedWordList)
         self.close()
 
-
+# A class for adding words from Joukahainen to the dictionary
 class JoukahainenDialog(QDialog):
     """Dialog for getting words from Joukahainen dictionary."""
 
@@ -206,7 +203,9 @@ class JoukahainenDialog(QDialog):
 
 # COMMON FUNCTIONS FOR FILE OPERATIONS
 
-# A function for informing about errors eq insufficient rights to use settings file etc
+# A function for informing about errors eq. insufficient rights to use settings file
+# in certain environments where administrative rights are needed to change files in program folders
+
 def alert(windowTitle, alertMsg, additionalMsg, details):
     """Creates a message box for critical errors
     Args:
@@ -245,7 +244,7 @@ def settingsFromJsonFile(file):
         settingsFile.close()
         return settingsData
     except Exception as e:
-        alert('Asetusten lukeminen ei onnistunut', 'Virhe avattaessa asetuksia', 'Lisätietoja Details-apinikkeella', str(e))
+        alert('Asetusten lukeminen ei onnistunut', 'Virhe avattaessa asetuksia', 'Lisätietoja Details-painikkeella', str(e))
 
 # A Function to save connection settings to a JSON file
 def saveSettingsToJsonFile(file, settingData):
@@ -260,4 +259,4 @@ def saveSettingsToJsonFile(file, settingData):
         json.dump(settingData, settingsFile)
         settingsFile.close()  # Close the file after
     except Exception as e:
-        alert('Asetusten tallennus ei onnistunut', 'Virhe tallennettaessa asetuksia', 'Lisätietoja Details-apinikkeella', str(e))
+        alert('Asetusten tallennus ei onnistunut', 'Virhe tallennettaessa asetuksia', 'Lisätietoja Details-painikkeella', str(e))
