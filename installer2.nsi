@@ -32,6 +32,11 @@
 # --- Variable definitions end
 
 # Interface Settings
+
+  # Add a bitmap (150 x 57 px) for a logo into the header of the installer page
+  !define MUI_HEADERIMAGE
+  !define MUI_HEADERIMAGE_BITMAP "HunninLoitsu4.bmp"
+
   # Check if user really wants to abort
   !define MUI_ABORTWARNING
 
