@@ -1,12 +1,16 @@
 # Files and a tool for Finnish hyphenation and spelling in Affinity Publisher v2
 
+![HSPkuva](https://user-images.githubusercontent.com/24242044/219871681-10188cb1-14d7-4e74-8957-083cb474d89e.png)
+
+
 This repository contains 3 files needed in Affinity Publisher for hyphenation and spell-checking of the Finnish language on **Windows** computers. These files have been forked from https://www.apt-browse.org/browse/debian/wheezy/main/all/myspell-fi/0.7-18/file/usr/share/hunspell. At the moment, hunspell dictionary found in that apt repository contains some repeating and unsorted word blocks. These have been removed in this Github repository. **Mac** users may need hyphenation dictionary because the automatic hyphenation language choise in Affinity Publisher does not work as expected. 
 
 ## Files to get started with Finnish spelling and hyphenation
 
 The `fi_FI.aff` file contains basic information how Finnish words are constructed. In the beginning, there is an instruction to set a correct character set. Original affix file uses **ISO8859-1** encoding. According to tests, I have been able to conduct that its works well with Finnish Windows 10. Further testing will be made with different operating systems and language versions in the future. Latest macOS versions have builtin support for Finnish language and there is no need for an additional spelling dictionary. But automatic hyphenation needs a dictionary. Only hyphenation dictionary `hyph_fi_FI.dic` is needed. Do not install other Hunspell dictionaries to your Mac. Instructions can be found on Wiki pages. There may be other sources of these files with **UTF8** encoding. In those files, the character setting on 1st row must be `SET ISO8859-1` to make spelling and hyphenation function properly. Wrong character encoding settings may add duplicate suggestions or display strange characters. The following screen shot shows correct suggestions when using dictionaries downloaded from this repository:
 
-![image](https://user-images.githubusercontent.com/24242044/205984577-ac7ab74b-f8fe-4bb8-8969-bd34ba0f276a.png)
+![image](https://user-images.githubusercontent.com/24242044/219872177-f15a6318-d02b-4ab8-a330-0d3a61b10568.png)
+
 
 ## Tool to update the spelling dictionary
 There is a tool for updating Finish spelling dictionary. You can add new words, import words from **Joukahainen** dictionary and maintain your dictionary with the **Spelling Maintenance Tool**. Insturctions to use the tool are found on Wiki pages or tool's Help menu. Language in the tool is Finnish only assuming that users publishing in Finnish can understand it.
@@ -34,4 +38,4 @@ In **Mac** computers (as macOS Ventura 13.1) put the hyphention file into folder
 
 
 ## Tools for updating and cleaning the spelling dictionary
-The structure of `fi_FI.dic` is very simple: On the 1st row there is a word counter, and the rest contain words in an alphabetical order, one word per row. The purpose of this repository is to provide simple tools for adding, sorting, and removing duplicates from the spelling dictionary. With appropriate tools, the dictionary can be maintained and expanded to meet our requirements. All tools can be used from a single GUI. You can add words to the speling dictonary, maintain integrity of the dictionary and import words from **Joukahainen** dictionary. It is a xml based dictionary used in **Voikko** spell checker. It contains thousands of words not found in the original **hunspell** dictionary. It can be found and downloaded from https://joukahainen.puimula.org/. 
+The structure of `fi_FI.dic` is very simple: On the 1st row there is a word counter, and the rest contain words in an alphabetical order, one word per row. The purpose of this repository is to provide simple tools for adding, sorting, and removing duplicates from the spelling dictionary. With appropriate tools, the dictionary can be maintained and expanded to meet our requirements. All tools can be used from a single GUI. You can add words to the speling dictonary, maintain integrity of the dictionary and import words from **Joukahainen** dictionary. It is a xml based dictionary used in **Voikko** spell checker. It contains thousands of words not found in the original **hunspell** dictionary. It can be found and downloaded from https://joukahainen.puimula.org/. For more information about the tool see https://github.com/MikaVainio/AffinityPublisherFISpelling/wiki/Ohje-suomeksi. There are installation and usage information in Finnish. To load the tool see releases section on the right side of this page.
