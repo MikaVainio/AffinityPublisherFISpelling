@@ -26,7 +26,7 @@ The `fi_FI.dic` file is a collection of Finnish words. There is a word counter a
 The `hyph_fi_FI.dic` file contains instructions how to split words for hyphenation. There is also a character set definition on the 1st row. To hyphenate correctly this file must be installed to a certain folder in your system.
 
 ## Installing files 
-You can download dictionary files by clicking the green Code button on the top right-hand corner. Unzip the contents to Affinity's Dictionaries folder. In **Windows** you can find this location in Affinity Publisher, through `Edit - Preferences - Tools`. You can also use the Windows istaller of the maintenance software to get dictionary files. The install will create a folder for dictionaries and you can then copy files to the Affinity's dictionary folder with Explorer or command line tools. Unfortunately there is no installer for Mac users.
+You can download dictionary files by clicking the green Code button on the top right-hand corner. Unzip the contents to Affinity's Dictionaries folder. In **Windows** you can find this location in Affinity Publisher, through `Edit - Preferences - Tools`. You can also use the Windows installer of the maintenance software to get dictionary files. The install will create a folder for dictionaries and you can then copy files to the Affinity's dictionary folder with Explorer or command line tools. Unfortunately there is no installer for Mac users.
 
 ![image](https://user-images.githubusercontent.com/24242044/205483402-095cd467-d668-45f7-826c-2dee38fca26b.png)
 
