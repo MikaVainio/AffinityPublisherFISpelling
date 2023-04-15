@@ -38,7 +38,7 @@ In **Mac** computers (as macOS Ventura 13.1) put the hyphention file into folder
 
 > :bulb: Dictionaries can also be used with previous version of Affinity Publisher in Windows. First create a folder for dictionaries named `fi_FI` under dictionaries folder which is normally `C:\ProgramData\Affinity\Common\1.0\Dictionaries` For more information see [this forum post ](https://forum.affinity.serif.com/index.php?/topic/98911-how-do-i-add-additional-dictionaries-to-affinity-publisher/). Dictionaries can also be used with various other writing or Desktop Publishing applications using Hunspell's spelling or hyphenation.
 
-> :warning: When you install dictionaries keep in mind that in Windows dictionaries must reside in folder `fi_FI` (with underscore) under `Dictionaries` and in MacOS it should be named `fi-FI` (with hyphen)
+> :warning: When you install dictionaries keep in mind that in Windows dictionaries must reside in folder `fi_FI` (with underscore) under `Dictionaries` and in MacOS it should be named `fi-FI` (with hyphen)!
 
 
 ## Tools for updating and cleaning the spelling dictionary
