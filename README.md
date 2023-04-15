@@ -30,13 +30,16 @@ You can download dictionary files by clicking the green Code button on the top r
 
 ![image](https://user-images.githubusercontent.com/24242044/205483402-095cd467-d668-45f7-826c-2dee38fca26b.png)
 
-Open the folder by clicking `Open` then copy the unzipped dictonary files to this folder. In **Windows** copy `fi_FI.aff`, `fi_FI.dic` and `hyph_fi_FI.dic`. If you are using **Mac** computer copy only `hyph_fi_FI.dic`. 
+Open the folder by clicking `Open` then copy the unzipped dictonary files. In **Windows** copy `fi_FI.aff`, `fi_FI.dic` and `hyph_fi_FI.dic` to a folder named as `fi_FI`. If you are using **Mac** computer copy only `hyph_fi_FI.dic` to folder named as `fi-FI`.
 
 In **Mac** computers (as macOS Ventura 13.1) put the hyphention file into folder `fi-Fi`. You must create this forlder first. For the correct path see the following picture:
 
 <img width="377" alt="image" src="https://user-images.githubusercontent.com/24242044/211194689-19258797-d408-4af3-9aef-ec9312fe4b82.png">
 
 > :bulb: Dictionaries can also be used with previous version of Affinity Publisher in Windows. First create a folder for dictionaries named `fi_FI` under dictionaries folder which is normally `C:\ProgramData\Affinity\Common\1.0\Dictionaries` For more information see [this forum post ](https://forum.affinity.serif.com/index.php?/topic/98911-how-do-i-add-additional-dictionaries-to-affinity-publisher/). Dictionaries can also be used with various other writing or Desktop Publishing applications using Hunspell's spelling or hyphenation.
+
+> :warning: When you install dictionaries keep in mind that in Windows dictionaries must reside in folder `fi_FI` (with underscore) under `Dictionaries` and in MacOS it should be named `fi-FI` (with hyphen)
+
 
 ## Tools for updating and cleaning the spelling dictionary
 The structure of `fi_FI.dic` is very simple: On the 1st row there is a word counter, and the rest contain words in an alphabetical order, one word per row. The purpose of this repository is to provide simple tools for adding, sorting, and removing duplicates from the spelling dictionary. With appropriate tools, the dictionary can be maintained and expanded to meet our requirements. All tools can be used from a single GUI. You can add words to the speling dictonary, maintain integrity of the dictionary and import words from **Joukahainen** dictionary. It is a xml based dictionary used in **Voikko** spell checker. It contains thousands of words not found in the original **hunspell** dictionary. It can be found and downloaded from https://joukahainen.puimula.org/. For more information about the tool see https://github.com/MikaVainio/AffinityPublisherFISpelling/wiki/Ohje-suomeksi. There are installation and usage information in Finnish. To load the tool see releases section on the right side of this page (or at the bottom if you are browsing with a smartphone).
